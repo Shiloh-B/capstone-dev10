@@ -1,0 +1,45 @@
+PROBLEM TO SOLVE
+-----------------
+Chat.App - A user chat app (I.E Discord) that allows users to communicate with one another via web socket protocol.
+
+OVERALL SCOPE
+--------------
+DB Tables (MySQL Relational Database)
+  - User (user_id, username, password_hash)
+  - Room (room_id, name)
+  - Message (message_id, message, timestamp, room_id, user_id)
+  - Room_has_User (room_id, user_id)
+
+Tech Stack
+  - Frontend
+    - React
+    - MUI Material (CSS Component Framework)
+  - Backend
+    - Java Spring (Persistent Storage, Security, JWT)
+    - Express / Node.js (Websocket Transfer)
+
+Additional Tech (New Learning)
+  - Web Socket Protocol using Socket.io
+  - Express / Node.js
+
+Page Views
+  - Login Page
+  - Landing Page
+    - Landing Page contains chatrooms to view / join
+  - Admin View
+    - Delete main chat room messages, disable accounts
+
+MVP PROJECTION
+---------------
+  - Login page using JWT authentication through Spring
+  - Landing page with a group chatroom of ALL users using Socket.io and express
+  - Admin view to delete messages from group chat room
+  - Ability for users to send messages in said chat room
+  - Logout functionality
+
+STRETCH GOALS
+--------------
+  - P2P messaging
+  - Group P2P messaging
+  - Account page
+  - Customizable Avatar Icons
