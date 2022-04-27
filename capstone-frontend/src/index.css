@@ -16,4 +16,73 @@ code {
 
 .landing-container {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.room-chat-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+}
+
+/* Room Container */
+
+.room-container {
+  width: 25%;
+  height: 100%;
+  border-right: 5px solid #1976d2;
+  background-color: #004183;
+}
+
+/* Room */
+
+.single-room-container {
+  width: 100%;
+  border-bottom: 4px solid #1976d2;
+  color: white;
+  cursor: pointer;
+  transition: background-color .2s ease;
+  padding: .5em 0em;
+}
+
+.single-room-container:hover {
+  background-color: #135ba3;
+}
+
+.active-room {
+  background-color: #135ba3;
+}
+
+.single-room-name {
+  margin: .0em 0em .0em 1em;
+  font-size: 1.75em;
+}
+
+/* Chat Container */
+
+.chat-container {
+  width: 75%;
+}
+
+.message-container {
+  height: 90%;
+}
+
+.message-form {
+  height: 10%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.message-input {
+  width: 85%;
+  margin-left: 1em !important;
+}
+
+.submit-message-button {
+  width: 10%;
+  height: 60%;
 }

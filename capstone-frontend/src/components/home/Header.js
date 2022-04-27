@@ -4,8 +4,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@mui/material'
 
 const Header = () => {
-
-  const settings = ['Logout'];
+  
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
