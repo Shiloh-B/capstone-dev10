@@ -69,4 +69,7 @@ public class Message {
         this.user = user;
     }
 
+// need room and user objects?
+
+
 }
