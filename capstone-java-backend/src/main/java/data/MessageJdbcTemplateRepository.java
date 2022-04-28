@@ -36,8 +36,6 @@ public class MessageJdbcTemplateRepository implements MessageRepository{
         Message message = jdbcTemplate.query(sql, new MessageMapper(), messageId).stream()
                 .findFirst().orElse(null);
 
-        //will be message provided instead of object once sql database is set up :)
-
         return message;
     }
 

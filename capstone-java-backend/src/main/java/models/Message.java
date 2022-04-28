@@ -9,8 +9,8 @@ public class Message {
     private int roomId;
     private int userId;
 
-    private Room room;
-    private User user;
+//    private Room room;
+//    private User user;
 
 
     public int getMessageId() {
@@ -53,23 +53,23 @@ public class Message {
         this.userId = userId;
     }
 
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-// need room and user objects?
+//    public Room getRoom() {
+//        return room;
+//    }
+//
+//    public void setRoom(Room room) {
+//        this.room = room;
+//    }
+//
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+//
+    // dk if room and user objects are needed here
 
 
 }
