@@ -1,17 +1,10 @@
 import React, { useState } from 'react'
 import Message from './Message';
 
-const MessageContainer = () => {
+const MessageContainer = ({ messages }) => {
 
-  // TODO: WILL DELETE ONCE DB IS SET UP
-  const testData = [{
-    username: "Shiloh",
-    message: "Hello World!"
-  }];
-
-  const [messages, setMessages] = useState(testData);
-
-  const logs = messages.map((message, key) => {<Message message={message} key={key} />})
+  const logs = messages.map((message, key) => <Message message={message} key={key} /> );
+  
   return (
     <div className='message-container'>
       {logs}

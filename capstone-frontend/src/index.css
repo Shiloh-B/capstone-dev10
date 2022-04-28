@@ -68,6 +68,24 @@ code {
 
 .message-container {
   height: 90%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.single-message-container {
+  width: 100%;
+  border-bottom: 4px solid #1976d2;
+}
+
+.server-message {
+  background-color: #004183;
+  color: white;
+}
+
+.single-message {
+  margin-left: 1em;
+  font-size: 1.25em;
 }
 
 .message-form {
