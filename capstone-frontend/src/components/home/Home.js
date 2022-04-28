@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header';
-import RoomContainer from './RoomContainer';
+import RoomContainer from './rooms/RoomContainer';
 import ChatContainer from './chat/ChatContainer';
 
 const Home = () => {
