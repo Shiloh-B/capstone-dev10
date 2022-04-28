@@ -3,7 +3,7 @@ import Room from './Room';
 
 const RoomContainer = () => {
 
-  const [rooms, setRooms] = useState(['Main', 'Second Room']);
+  const [rooms, setRooms] = useState(['Main']);
 
   const roomList = rooms.map((room, key) => <Room roomName={room} key={key} />);
 
