@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@mui/material'
 
