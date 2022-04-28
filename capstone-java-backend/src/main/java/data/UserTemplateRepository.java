@@ -5,10 +5,12 @@ import models.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+@Repository
 
 public class UserTemplateRepository implements  UserRepository{
     private final JdbcTemplate jdbcTemplate;
@@ -55,12 +57,19 @@ public class UserTemplateRepository implements  UserRepository{
     }
 
     @Override
-    public boolean update() {
-        return false;
+    public boolean update(User user) {
+        final String sql = "update user " +
+                "set " +
+                "username = ?,"+ "password = ?,+ " +
+                "where user_id = ?;";
+         return jdbcTemplate.update(sql,
+                 user.getUsername(),
+                 user.getPasswordHash())> 0;
     }
 
     @Override
     public boolean deleteById(int userID) {
-        return false;
+        jdbcTemplate.update("delete from user where user_id= ?;", userID);
+        return    jdbcTemplate.update("delete from user where user_id= ?;", userID) > 0;
     }
 }
