@@ -28,7 +28,7 @@ const ChatContainer = () => {
       console.log(msg);
     });
 
-  }, [socket]);
+  }, [socket, messages]);
 
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
@@ -39,6 +39,7 @@ const ChatContainer = () => {
     let newMessages = [...messages];
     newMessages.push({ username: user.username, message: message})
     setMessages(newMessages);
+    setMessage('');
 
     // emit broadcast
     socket.emit('chat message', {username: 'Nik', message: message});
@@ -48,7 +49,7 @@ const ChatContainer = () => {
     <div className='chat-container'>
       <MessageContainer messages={messages} />
       <form className='message-form' autoComplete='off' onSubmit={submitMessage}>
-        <TextField label='Say Hello!' variant='outlined' className='message-input' name='message' aria-autocomplete='false' onChange={handleMessageChange} />
+        <TextField label='Say Hello!' variant='outlined' className='message-input' name='message' value={message} aria-autocomplete='false' onChange={handleMessageChange} />
         <Button variant='contained' className='submit-message-button' type='submit'>Send</Button>
       </form>
     </div>
