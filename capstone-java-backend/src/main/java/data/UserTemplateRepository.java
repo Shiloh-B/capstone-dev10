@@ -1,0 +1,75 @@
+package data;
+
+import data.mappers.UserMapper;
+import models.User;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.List;
+@Repository
+
+public class UserTemplateRepository implements  UserRepository{
+    private final JdbcTemplate jdbcTemplate;
+
+    public UserTemplateRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<User> findAll() {
+        final String sql = "select user_id, username, password_hash from `chat_app`.`user` limit 1000";
+         return jdbcTemplate.query(sql, new UserMapper());
+    }
+
+    @Override
+    public User findById(int userID) {
+        final String sql = "select user_id, username, password_hash " +
+                "from `chat_app`.`user`"+
+                "where user_id = ?";
+        User user = jdbcTemplate.query(sql, new UserMapper(), userID).stream()
+                .findFirst().orElse(null);
+        if(user != null){
+            //TODO RoomUser list here
+        }
+        return user;
+    }
+
+    @Override
+    public User add(User user) {
+        final String sql = "insert into user(user_id, username, password_hash) " +
+                "values (?,?,?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPasswordHash());
+            return ps;
+        }, keyHolder);
+        if(rowsAffected==0) {
+            return null;
+        }
+        user.setUserID(keyHolder.getKey().intValue());
+        return user;
+    }
+
+    @Override
+    public boolean update(User user) {
+        final String sql = "update user " +
+                "set " +
+                "username = ?,"+ "password = ?,+ " +
+                "where user_id = ?;";
+         return jdbcTemplate.update(sql,
+                 user.getUsername(),
+                 user.getPasswordHash())> 0;
+    }
+
+    @Override
+    public boolean deleteById(int userID) {
+        jdbcTemplate.update("delete from user where user_id= ?;", userID);
+        return    jdbcTemplate.update("delete from user where user_id= ?;", userID) > 0;
+    }
+}
