@@ -21,13 +21,13 @@ public class UserTemplateRepository implements  UserRepository{
 
     @Override
     public List<User> findAll() {
-        final String sql = "select user_id, username, password_hash from `chat_app`.`user` limit 1000";
+        final String sql = "select user_id, username, password_hash, disabled from `chat_app`.`user` limit 1000";
          return jdbcTemplate.query(sql, new UserMapper());
     }
 
     @Override
     public User findByUsername(String username) {
-        final String sql = "select user_id, username, password_hash " +
+        final String sql = "select user_id, username, password_hash, disabled " +
                 "from `chat_app`.`user`"+
                 "where username = ?";
         User user = jdbcTemplate.query(sql, new UserMapper(), username).stream()
