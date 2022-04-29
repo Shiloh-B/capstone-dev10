@@ -98,3 +98,12 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+delimiter //
+create procedure set_known_good_state()
+begin
+	delete from `user`;
+    alter table `user` auto_increment = 1;
+    insert into user(username, password_hash, disabled) values("nik", "password", 0);
+end //
+delimiter ;
