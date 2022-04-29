@@ -6,7 +6,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate('/home');
+    navigate('/auth');
   }, []);
 
   return (
