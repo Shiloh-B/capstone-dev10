@@ -1,6 +1,7 @@
 package data;
 
-import models.Message;
+import capstone.data.MessageJdbcTemplateRepository;
+import capstone.models.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,6 @@ class MessageJdbcTemplateRepositoryTest {
     void shouldFindAll() {
         List<Message> messages = repository.findAll();
         assertNotNull(messages);
-
-        // can't predict order
         // if delete is first, we're down to 3
         // if add is first, we may go as high as 6
         assertTrue(messages.size() >= 3 && messages.size() <= 6);
@@ -51,7 +50,6 @@ class MessageJdbcTemplateRepositoryTest {
 
     @Test
     void shouldAdd() {
-        // all fields
         Message message = makeMessage();
         Message actual = repository.add(message);
         assertNotNull(actual);

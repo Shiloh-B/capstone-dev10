@@ -1,6 +1,6 @@
-package data.mappers;
+package capstone.data.mappers;
 
-import models.Message;
+import capstone.models.Message;
 
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
@@ -14,11 +14,10 @@ public class MessageMapper implements RowMapper {
         message.setMessageContent(resultSet.getString("message"));
         message.setRoomId(resultSet.getInt("room_id"));
         message.setUserId(resultSet.getInt("user_id"));
-        if (resultSet.getTimestamp("timestamp") != null) {
-            message.setTimeStamp(resultSet.getTimestamp("timestamp"));
+        if (resultSet.getTimestamp("time_stamp") != null) {
+            message.setTimeStamp(resultSet.getTimestamp("time_stamp"));
         }
         return message;
     }
 }
 
-//message_id, message, timestamp, room_id, user_id

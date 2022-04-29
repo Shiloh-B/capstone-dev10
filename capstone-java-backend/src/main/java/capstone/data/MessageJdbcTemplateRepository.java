@@ -1,7 +1,7 @@
-package data;
+package capstone.data;
 
-import data.mappers.MessageMapper;
-import models.Message;
+import capstone.data.mappers.MessageMapper;
+import capstone.models.Message;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
-public class MessageJdbcTemplateRepository implements MessageRepository{
+public class MessageJdbcTemplateRepository implements MessageRepository {
 
     private final JdbcTemplate jdbcTemplate;
 

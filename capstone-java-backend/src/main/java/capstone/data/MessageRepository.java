@@ -1,6 +1,6 @@
-package data;
+package capstone.data;
 
-import models.Message;
+import capstone.models.Message;
 
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;

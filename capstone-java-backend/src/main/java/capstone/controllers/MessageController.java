@@ -1,4 +1,4 @@
-package controllers;
+package capstone.controllers;
 
 public class MessageController {
 }
