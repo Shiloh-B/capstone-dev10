@@ -48,6 +48,7 @@ class UserTemplateRepositoryTest {
         User test = makeUser();
         test.setUsername("test");
         assertTrue(repository.update(test));
+        assertEquals(test.getUsername(), repository.findByUsername("test").getUsername());
     }
 
     @Test
