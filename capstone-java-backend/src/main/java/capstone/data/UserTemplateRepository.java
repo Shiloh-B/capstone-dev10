@@ -26,11 +26,11 @@ public class UserTemplateRepository implements  UserRepository{
     }
 
     @Override
-    public User findById(int userID) {
+    public User findByUsername(String username) {
         final String sql = "select user_id, username, password_hash " +
                 "from `chat_app`.`user`"+
-                "where user_id = ?";
-        User user = jdbcTemplate.query(sql, new UserMapper(), userID).stream()
+                "where username = ?";
+        User user = jdbcTemplate.query(sql, new UserMapper(), username).stream()
                 .findFirst().orElse(null);
         if(user != null){
             //TODO RoomUser list here
@@ -40,8 +40,8 @@ public class UserTemplateRepository implements  UserRepository{
 
     @Override
     public User add(User user) {
-        final String sql = "insert into user(user_id, username, password_hash) " +
-                "values (?,?,?)";
+        final String sql = "insert into user(username, password_hash) " +
+                "values (?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -68,8 +68,8 @@ public class UserTemplateRepository implements  UserRepository{
     }
 
     @Override
-    public boolean deleteById(int userID) {
-        jdbcTemplate.update("delete from user where user_id= ?;", userID);
-        return    jdbcTemplate.update("delete from user where user_id= ?;", userID) > 0;
+    public boolean deleteByUsername(String username) {
+        jdbcTemplate.update("delete from user where username= ?;", username);
+        return    jdbcTemplate.update("delete from user where username= ?;", username) > 0;
     }
 }
