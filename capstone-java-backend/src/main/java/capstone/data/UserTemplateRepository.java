@@ -41,7 +41,7 @@ public class UserTemplateRepository implements  UserRepository{
     @Override
     public User add(User user) {
         final String sql = "insert into user(username, password_hash, disabled) " +
-                "values (?,?, ?)";
+                "values (?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -61,17 +61,17 @@ public class UserTemplateRepository implements  UserRepository{
     public boolean update(User user) {
         final String sql = "update user " +
                 "set " +
-                "username = ?,"+ "password = ?,+ disabled = ?" +
+                "username = ?, "+ "password_hash = ?, " + "disabled = ? " +
                 "where user_id = ?;";
          return jdbcTemplate.update(sql,
                  user.getUsername(),
                  user.getPasswordHash(),
-                 user.getIsDisabled())> 0;
+                 user.getIsDisabled(),
+                 user.getUserID())> 0;
     }
 
     @Override
     public boolean deleteByUsername(String username) {
-        jdbcTemplate.update("delete from user where username= ?;", username);
         return  jdbcTemplate.update("delete from user where username= ?;", username) > 0;
     }
 }

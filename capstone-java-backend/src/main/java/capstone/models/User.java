@@ -6,6 +6,16 @@ public class User {
     private String username;
     private String passwordHash;
     private boolean isDisabled;
+    public User(){
+    }
+    public User(int userId, String username, String passwordHash, boolean isDisabled) {
+        this.userId = userId;
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.isDisabled = isDisabled;
+    }
+
+
     //TODO RoomUser list probably
     public int getUserID() {
         return userId;

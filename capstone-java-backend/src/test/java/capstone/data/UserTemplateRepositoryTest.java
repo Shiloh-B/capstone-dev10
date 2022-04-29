@@ -27,11 +27,14 @@ class UserTemplateRepositoryTest {
         assertNotNull(list);
         System.out.println(list.get(0).getUsername());
         System.out.println(list.get(1).getUsername());
-        assertEquals(list.size(), 1);
+        assertTrue(list.size()>=1 && list.size() <=3);
     }
 
     @Test
-    void shouldFindById() {
+    void shouldFindByUsername() {
+        User shiloh = repository.findByUsername("shiloh");
+        assertEquals(shiloh.getPasswordHash(), "password");
+        assertEquals(shiloh.getUsername(), "shiloh");
     }
     @Test
     void shouldAdd() {
@@ -39,22 +42,25 @@ class UserTemplateRepositoryTest {
         User actual = repository.add(user);
         assertNotNull(actual);
         assertEquals(user.getUserID(), actual.getUserID());
+    }
+    @Test
+    void shouldUpdate() {
+        User test = makeUser();
+        test.setUsername("test");
+        assertTrue(repository.update(test));
+    }
 
+    @Test
+    void shouldDeleteByUsername() {
+        assertTrue(repository.deleteByUsername("shiloh"));
     }
 
     private User makeUser() {
         User user = new User();
         user.setUserID(1);
-        user.setUsername("nik");
+        user.setUsername("shiloh");
         user.setPasswordHash("password");
+        user.setDisabled(false);
         return user;
-    }
-
-    @Test
-    void update() {
-    }
-
-    @Test
-    void deleteById() {
     }
 }
