@@ -8,7 +8,7 @@ const SignInForm = ({ handleChange, swapView, handleSignIn }) => {
       <h1>Sign In To Your Account</h1>
       <form className='sign-in-form' onSubmit={handleSignIn}>
         <div className='login-fields'>
-          <TextField required name='email' label='Email' type='email' variant='standard' className='login-input-field' onChange={handleChange} />
+          <TextField required name='username' label='Username' type='text' variant='standard' className='login-input-field' onChange={handleChange} />
         </div>
         <div className='login-fields'>
           <TextField required name='password' label='Password' type='password' variant='standard' className='login-input-field'  onChange={handleChange} />

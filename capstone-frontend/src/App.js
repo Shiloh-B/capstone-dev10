@@ -17,7 +17,7 @@ function App() {
   });
 
   useEffect(() => {
-    let s = io('https://ec53-2601-447-8101-6a00-4c7c-ceb5-69cc-5760.ngrok.io');
+    let s = io('http://localhost:3003');
     setSocket(s);
   }, []);
 

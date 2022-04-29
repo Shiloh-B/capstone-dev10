@@ -36,6 +36,10 @@ const Login = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
+    if(user.password !== user.confirmPassword) {
+      console.log('Passwords dont match.');
+      return;
+    }
     console.log('sign up');
   }
 
