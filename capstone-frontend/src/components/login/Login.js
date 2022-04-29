@@ -2,12 +2,15 @@ import React, { useContext, useState } from 'react';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 import UserContext from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
 
   const [user, setUser] = useContext(UserContext);
   const [isSignIn, setIsSignIn] = useState(true);
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     let newUser = {...user};
@@ -21,7 +24,14 @@ const Login = () => {
 
   const handleSignIn = (e) => {
     e.preventDefault();
+    // testing purpose only, username set to email
+    let newUser = {...user};
+    newUser.username = newUser.email;
+    setUser(newUser);
     console.log('sign in');
+
+    // this will be hidden behind a success callback
+    navigate('/home');
   }
 
   const handleSignUp = (e) => {
