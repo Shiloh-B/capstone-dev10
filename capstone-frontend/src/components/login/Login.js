@@ -28,7 +28,16 @@ const Login = () => {
     let newUser = {...user};
     newUser.username = newUser.email;
     setUser(newUser);
-    console.log('sign in');
+    
+    // call /auth
+    fetch('http://localhost:8080/authenticate', {
+      method: 'POST',
+      body: JSON.stringify({username: user.username, password: user.password})
+    }).then((res) => {
+      return res.json();
+    }).then((json) => {
+      console.log(json);
+    });
 
     // this will be hidden behind a success callback
     navigate('/home');
