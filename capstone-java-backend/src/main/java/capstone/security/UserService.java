@@ -1,7 +1,7 @@
-package security;
+package capstone.security;
 
-import data.UserRepository;
-import models.User;
+import capstone.data.UserRepository;
+import capstone.models.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;

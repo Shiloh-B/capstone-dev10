@@ -1,4 +1,4 @@
-package controllers;
+package capstone.controllers;
 
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
@@ -9,8 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
-import security.JwtConverter;
-import security.UserService;
+import capstone.security.JwtConverter;
+import capstone.security.UserService;
 
 import javax.validation.ValidationException;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtConverter converter;
-    private final security.UserService UserService;
+    private final capstone.security.UserService UserService;
 
     public AuthController(AuthenticationManager authenticationManager, JwtConverter converter, UserService UserService) {
         this.authenticationManager = authenticationManager;

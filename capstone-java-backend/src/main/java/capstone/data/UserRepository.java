@@ -1,4 +1,4 @@
-package data;
+package capstone.data;
 
 public class UserRepository {
 
