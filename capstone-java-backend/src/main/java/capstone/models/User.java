@@ -5,6 +5,7 @@ public class User {
     private int userId;
     private String username;
     private String passwordHash;
+    private boolean isDisabled;
     //TODO RoomUser list probably
     public int getUserID() {
         return userId;
@@ -28,6 +29,14 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public boolean getIsDisabled() {
+        return isDisabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        isDisabled = disabled;
     }
 
 }
