@@ -42,7 +42,7 @@ const ChatContainer = () => {
     setMessage('');
 
     // emit broadcast
-    socket.emit('chat message', {username: 'Nik', message: message});
+    socket.emit('chat message', {username: user.username, message: message});
   }
 
   return (

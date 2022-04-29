@@ -12,12 +12,12 @@ function App() {
 
   const [socket, setSocket] = useState(null);
   const [user, setUser] = useState({
-    email: 'shilohballards@gmail.com',
-    username: 'Shiloh'
+    email: '',
+    username: ''
   });
 
   useEffect(() => {
-    let s = io('http://localhost:3003');
+    let s = io('https://ec53-2601-447-8101-6a00-4c7c-ceb5-69cc-5760.ngrok.io');
     setSocket(s);
   }, []);
 
