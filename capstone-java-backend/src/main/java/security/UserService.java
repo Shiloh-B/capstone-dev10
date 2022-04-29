@@ -33,7 +33,7 @@ public class UserService {
         return user;
     }
 
-    public User create(String username, String password) {
+    public User add(String username, String password) {
         validate(username);
         validatePassword(password);
 
@@ -41,7 +41,7 @@ public class UserService {
 
         User user = new User(0, username, password, false, List.of("User"));
 
-        return repository.create(user);
+        return repository.add(user);
     }
 
     private void validate(String username) {

@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins ={"http://localhost:3030"})
-@RequestMapping("/api")
+@CrossOrigin(origins ={"http://localhost:*"})
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -65,7 +64,7 @@ public class AuthController {
             String username = credentials.get("username");
             String password = credentials.get("password");
 
-            user = UserService.create(username, password);
+            user = UserService.add(username, password);
         } catch (ValidationException ex) {
             return new ResponseEntity<>(List.of(ex.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (DuplicateKeyException ex) {
@@ -73,7 +72,7 @@ public class AuthController {
         }
 
         HashMap<String, Integer> map = new HashMap<>();
-        map.put("appUserId", user.getUserId());
+        map.put("userId", user.getUserId());
 
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
