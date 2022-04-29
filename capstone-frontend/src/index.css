@@ -105,3 +105,59 @@ code {
   width: 10%;
   height: 60%;
 }
+
+/* Login */
+
+.login-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #1976d2;
+}
+
+.login-wrapper {
+  color: #1976d2;
+  background-color: white;
+  width: 50%;
+  text-align: center;
+  padding: 1em;
+  box-shadow: 0px 2px 2px rgb(104, 104, 104);
+  border-radius: 5px;
+}
+
+.login-header {
+  font-size: 3em;
+  margin-bottom: 0;
+}
+
+.sign-in-container h1 {
+  font-size: 1.5em;
+  margin-bottom: 0
+}
+
+.sign-in-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-fields {
+  width: 50%;
+  margin: .5em 0;
+}
+
+.login-input-field {
+  width: 100%;
+}
+
+.sign-in-button {
+  margin: .5em 0em !important;
+}
+
+.swap-sign-view {
+  font-size: .75em !important;
+  cursor: pointer;
+}
