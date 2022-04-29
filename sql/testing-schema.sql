@@ -75,7 +75,7 @@ DROP TABLE IF EXISTS `chat_app_test`.`message` ;
 CREATE TABLE IF NOT EXISTS `chat_app_test`.`message` (
   `message_id` INT NOT NULL AUTO_INCREMENT,
   `message` VARCHAR(250) NOT NULL,
-  `timestamp` TIMESTAMP(1) NOT NULL,
+  `time_stamp` TIMESTAMP(1) NOT NULL,
   `room_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`message_id`),
@@ -106,7 +106,7 @@ begin
     alter table message auto_increment = 1;
 
 	insert into message
-		(message, timestamp, room_id, user_id)
+		(message, time_stamp, room_id, user_id)
 	values
 		('Hello World!','04/23/17 04:34:22',1,1),
 		('Test 1','10/03/2017 07:29:46',2,2),
