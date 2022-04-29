@@ -1,6 +1,6 @@
-package data;
+package capstone.data;
 
-import models.User;
+import capstone.models.User;
 
 import java.util.List;
 

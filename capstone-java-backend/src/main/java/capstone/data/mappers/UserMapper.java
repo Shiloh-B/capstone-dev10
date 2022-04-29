@@ -1,6 +1,6 @@
-package data.mappers;
+package capstone.data.mappers;
 import org.springframework.jdbc.core.RowMapper;
-import models.User;
+import capstone.models.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 /*

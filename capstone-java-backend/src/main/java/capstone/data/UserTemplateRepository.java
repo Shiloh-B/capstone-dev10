@@ -1,7 +1,7 @@
-package data;
+package capstone.data;
 
-import data.mappers.UserMapper;
-import models.User;
+import capstone.data.mappers.UserMapper;
+import capstone.models.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 @Repository
-
 public class UserTemplateRepository implements  UserRepository{
     private final JdbcTemplate jdbcTemplate;
 

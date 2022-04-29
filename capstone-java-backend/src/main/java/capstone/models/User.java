@@ -1,4 +1,4 @@
-package models;
+package capstone.models;
 
 public class User {
 
