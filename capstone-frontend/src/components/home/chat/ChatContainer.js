@@ -19,7 +19,6 @@ const ChatContainer = () => {
       let newMessages = [...messages];
       newMessages.push(msg);
       setMessages(newMessages);
-      console.log(msg);
     });
 
   }, [socket, messages]);
