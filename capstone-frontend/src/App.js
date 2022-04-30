@@ -1,7 +1,6 @@
 import './index.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
+import React, { useState } from 'react';
 import UserContext from './context/UserContext';
 import SocketContext from './context/SocketContext';
 import Home from './components/home/Home';
@@ -15,11 +14,6 @@ function App() {
     email: '',
     username: ''
   });
-
-  useEffect(() => {
-    let s = io('http://localhost:3003');
-    setSocket(s);
-  }, []);
 
   return (
     <div className="App">
