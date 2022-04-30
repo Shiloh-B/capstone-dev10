@@ -24,10 +24,6 @@ const Login = () => {
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    // testing purpose only, username set to email
-    let newUser = {...user};
-    newUser.username = newUser.email;
-    setUser(newUser);
     
     // call /auth
     fetch('http://localhost:8080/authenticate', {
