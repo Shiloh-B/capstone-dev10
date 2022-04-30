@@ -10,13 +10,7 @@ const ChatContainer = () => {
   const [socket, setSocket] = useContext(SocketContext);
   const [message, setMessage] = useState('');
 
-  // TODO: WILL DELETE ONCE DB IS SET UP
-  const testData = [{
-    username: "Becky",
-    message: "Hello World!"
-  }];
-
-  const [messages, setMessages] = useState(testData);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     if(socket == null) return;

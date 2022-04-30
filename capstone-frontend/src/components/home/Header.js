@@ -17,6 +17,7 @@ const Header = () => {
   };
 
   const handleLogOut = () => {
+    localStorage.removeItem("token");
     navigate('/auth');
   }
 

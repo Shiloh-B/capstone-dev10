@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins ={"http://localhost:*"})
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;

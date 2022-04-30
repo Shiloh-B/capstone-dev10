@@ -161,3 +161,10 @@ code {
   font-size: .75em !important;
   cursor: pointer;
 }
+
+.login-error {
+  font-size: 1em !important;
+  text-align: left;
+  color: red;
+  margin: 0;
+}
