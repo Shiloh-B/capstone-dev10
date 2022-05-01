@@ -81,10 +81,10 @@ public class UserTemplateRepository implements  UserRepository{
                  appUser.getAppUserId())> 0;
     }
 
-    @Override
-    public boolean deleteByUsername(String username) {
-        return  jdbcTemplate.update("delete from user where username= ?;", username) > 0;
-    }
+//    @Override
+//    public boolean deleteByUsername(String username) {
+//        return  jdbcTemplate.update("delete from user where username= ?;", username) > 0;
+//    }
 
     private void updateRoles(AppUser user) {
         // delete all roles then re add

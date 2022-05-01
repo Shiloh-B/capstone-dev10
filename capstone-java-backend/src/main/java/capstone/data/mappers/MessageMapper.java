@@ -9,15 +9,13 @@ import java.sql.SQLException;
 public class MessageMapper implements RowMapper {
     @Override
     public Message mapRow(ResultSet resultSet, int i) throws SQLException {
-        Message message = new Message();
-        message.setMessageId(resultSet.getInt("message_id"));
-        message.setMessageContent(resultSet.getString("message"));
-        message.setRoomId(resultSet.getInt("room_id"));
-        message.setUserId(resultSet.getInt("user_id"));
-        if (resultSet.getTimestamp("time_stamp") != null) {
-            message.setTimeStamp(resultSet.getTimestamp("time_stamp"));
-        }
-        return message;
+        return new Message(
+                resultSet.getInt("message_id"),
+                resultSet.getString("message"),
+                resultSet.getTimestamp("timestamp"),
+                resultSet.getInt("room_id"),
+                resultSet.getInt("user_id")
+        );
     }
 }
 

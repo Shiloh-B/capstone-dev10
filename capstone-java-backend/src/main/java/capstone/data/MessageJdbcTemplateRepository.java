@@ -24,14 +24,14 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
 
     @Override
     public List<Message> findAll() {
-        final String sql = "select message_id, message, time_stamp, room_id, user_id "
+        final String sql = "select message_id, message, timestamp, room_id, user_id "
                 + "from message limit 1000;";
         return jdbcTemplate.query(sql, new MessageMapper());
     }
 
     @Override
     public Message findById(int messageId) {
-        final String sql = "select message_id, message, time_stamp, room_id, user_id "
+        final String sql = "select message_id, message, timestamp, room_id, user_id "
                 + "from message "
                 + "where message_id = ?;";
 
@@ -43,7 +43,7 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
 
     @Override
     public Message add(Message message) {
-        final String sql = "insert into message (message, time_stamp, room_id, user_id) "
+        final String sql = "insert into message (message, timestamp, room_id, user_id) "
                 + " values (?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -68,7 +68,7 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
     public boolean update(Message message) {
         final String sql = "update message set "
                 + "message = ?, "
-                + "time_stamp = ?, "
+                + "timestamp = ?, "
                 + "room_id = ?, "
                 + "user_id = ? "
                 + "where message_id = ?;";

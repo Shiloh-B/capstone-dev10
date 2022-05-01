@@ -9,6 +9,18 @@ public class Message {
     private int roomId;
     private int userId;
 
+    public Message(int messageId, String messageContent, Timestamp timeStamp, int roomId, int userId) {
+        this.messageId = messageId;
+        this.messageContent = messageContent;
+        this.timeStamp = timeStamp;
+        this.roomId = roomId;
+        this.userId = userId;
+    }
+
+    public Message() {
+        // default constructor
+    }
+
 //    private Room room;
 //    private User user;
 

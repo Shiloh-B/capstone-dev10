@@ -140,19 +140,32 @@ create procedure set_known_good_state()
 begin
 	delete from role_has_user;
     
+    delete from message;
+    alter table message auto_increment = 1;
+    
 	delete from `user`;
     alter table `user` auto_increment = 1;
     delete from `role`;
     alter table `role` auto_increment = 1;
     
+    delete from room;
+    alter table room auto_increment = 1;
+    
     insert into role(`name`) values("USER");
     insert into role(`name`) values("ADMIN");
     
-    insert into user(username, password_hash, disabled) values("nik", "$2a$10$yxFMZBgKlAMaOR7qwIFMmuvvmi.w0EgEV0AnTgV/mdVzJi.TEofOG", 0);
-    insert into user(username, password_hash, disabled) values("shiloh", "$2a$10$yxFMZBgKlAMaOR7qwIFMmuvvmi.w0EgEV0AnTgV/mdVzJi.TEofOG", 0);
+    insert into user(user_id, username, password_hash, disabled) values(1, "nik", "$2a$10$yxFMZBgKlAMaOR7qwIFMmuvvmi.w0EgEV0AnTgV/mdVzJi.TEofOG", 0);
+    insert into user(user_id, username, password_hash, disabled) values(2, "shiloh", "$2a$10$yxFMZBgKlAMaOR7qwIFMmuvvmi.w0EgEV0AnTgV/mdVzJi.TEofOG", 0);
 
     insert into role_has_user(role_id, user_id) values(2, 1);
     insert into role_has_user(role_id, user_id) values(2, 2);
+    
+    insert into room(room_id, `name`) values(1, "test room");
+    insert into room(room_id, `name`) values(2, "test room 2");
+    
+    insert into message(message, `timestamp`, room_id, user_id) values("test", "2022-04-30 12:12:12", 1, 1);
+    insert into message(message, `timestamp`, room_id, user_id) values("test2", "2022-04-30 12:12:12", 1, 1);
+    insert into message(message, `timestamp`, room_id, user_id) values("test3", "2022-04-30 12:12:12", 1, 1);
     
 end //
 delimiter ;

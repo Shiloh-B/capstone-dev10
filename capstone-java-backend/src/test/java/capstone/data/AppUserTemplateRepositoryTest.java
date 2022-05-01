@@ -53,8 +53,8 @@ class AppUserTemplateRepositoryTest {
         assertNotNull(actual);
     }
 
-    @Test
-    void shouldDeleteByUsername() {
-        assertTrue(repository.deleteByUsername("shiloh"));
-    }
+//    @Test
+//    void shouldDeleteByUsername() {
+//        assertTrue(repository.deleteByUsername("shiloh"));
+//    }
 }

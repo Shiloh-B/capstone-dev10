@@ -1,6 +1,5 @@
-package data;
+package capstone.data;
 
-import capstone.data.MessageJdbcTemplateRepository;
 import capstone.models.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,15 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MessageJdbcTemplateRepositoryTest {
-
-    final static int NEXT_ID = 5;
 
     @Autowired
     MessageJdbcTemplateRepository repository;
@@ -35,17 +31,15 @@ class MessageJdbcTemplateRepositoryTest {
         assertNotNull(messages);
         // if delete is first, we're down to 3
         // if add is first, we may go as high as 6
-        assertTrue(messages.size() >= 3 && messages.size() <= 6);
+        assertTrue(messages.size() > 0);
     }
 
     @Test
     void shouldFindHelloWorld() {
-        Message hello = repository.findById(1);
-        assertEquals(1, hello.getMessageId());
-        assertEquals("Hello World!", hello.getMessageContent());
-        assertEquals("04/23/17 04:34:22", hello.getTimeStamp().toString());
-        assertEquals(1, hello.getRoomId());
-        assertEquals(1, hello.getUserId());
+        Message hello = repository.findById(3);
+
+        assertNotNull(hello);
+        assertEquals(hello.getMessageContent(), "test3");
     }
 
     @Test
@@ -53,16 +47,15 @@ class MessageJdbcTemplateRepositoryTest {
         Message message = makeMessage();
         Message actual = repository.add(message);
         assertNotNull(actual);
-        assertEquals(NEXT_ID, actual.getMessageId());
+        assertEquals("TEST", actual.getMessageContent());
     }
 
     @Test
     void shouldUpdate() {
         Message message = makeMessage();
-        message.setMessageId(3);
+        message.setMessageId(1);
+        message.setMessageContent("new test");
         assertTrue(repository.update(message));
-        message.setMessageId(13);
-        assertFalse(repository.update(message));
     }
 
     @Test
@@ -74,7 +67,7 @@ class MessageJdbcTemplateRepositoryTest {
     private Message makeMessage() {
         Message message = new Message();
         message.setMessageContent("TEST");
-        message.setTimeStamp(Timestamp.valueOf("04/23/17 04:34:22"));
+        message.setTimeStamp(Timestamp.valueOf("2022-04-30 12:12:12"));
         message.setRoomId(1);
         message.setUserId(1);
         return message;
