@@ -5,11 +5,12 @@ import capstone.models.Room;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
-
+@Repository
 public class RoomTemplateRepository implements RoomRepository {
 
     private final JdbcTemplate jdbcTemplate;
@@ -19,10 +20,11 @@ public class RoomTemplateRepository implements RoomRepository {
     }
 
     @Override
-    public List<Room> findByUserId(int AppUserId) {
-        final String sql = "select room_id, name from room where "
-    //TODO unsure on this one
-        return null;
+    public List<Room> findByUserId(int appUserId) {
+        final String sql = "select r.room_id, r.`name` from room r " +
+                "inner join room_has_user rhu on rhu.room_id = r.room_id " +
+                "where rhu.user_id = ?;";
+        return jdbcTemplate.query(sql, new RoomMapper(), appUserId);
     }
 
     @Override
@@ -34,13 +36,14 @@ public class RoomTemplateRepository implements RoomRepository {
 
     @Override
     public Room add(Room room) {
-        final String sql = "insert into room (room_id, name) values (?,?)";
+        final String sql = "insert into room (`name`) values (?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, room.getRoomName());
             return ps;
         }, keyHolder);
+
         if (rowsAffected <= 0) {
             return null;
         }
@@ -51,8 +54,8 @@ public class RoomTemplateRepository implements RoomRepository {
     @Override
     public boolean update(Room room) {
         final String sql = "update room set "
-                + "name = ?, "
-                + "where room_id = ";
+                + "`name` = ?, "
+                + "where room_id = ?";
         return jdbcTemplate.update(sql,
                 room.getRoomName(), room.getRoomId()) > 0;
     }

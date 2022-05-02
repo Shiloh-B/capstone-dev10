@@ -15,6 +15,10 @@ public class Room {
         this.roomName = roomName;
     }
 
+    public Room() {
+        //default constructor
+    }
+
     public int getRoomId() {
         return roomId;
     }
