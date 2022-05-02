@@ -1,16 +1,20 @@
 package capstone.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Room {
 
     private int roomId;
     private String roomName;
 
-    //private List<User> userList = new ArrayList<>(); TODO will be AppUser
-    // private List<Message> messageList = new ArrayList<>(); TODO will be Message
-
-    public Room(int roomId, String roomName) {
+    private List<AppUser> userList = new ArrayList<>();
+    private List<Message> messageList = new ArrayList<>();
+    public Room(int roomId, String roomName, List<AppUser> userList, List<Message> messageList) {
         this.roomId = roomId;
         this.roomName = roomName;
+        this.userList = userList;
+        this.messageList = messageList;
     }
 
     public int getRoomId() {
