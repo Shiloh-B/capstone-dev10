@@ -22,6 +22,7 @@ public class AppUserService implements UserDetailsService {
     public AppUserService(UserRepository repository,
                           MessageRepository messageRepository,
                           PasswordEncoder encoder) {
+        this.messageRepository = messageRepository;
         this.repository = repository;
         this.encoder = encoder;
     }
