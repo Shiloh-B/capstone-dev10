@@ -29,16 +29,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
 
         http.authorizeRequests()
-                .antMatchers("/api/authenticate").permitAll()
-                .antMatchers("/api/create_account").permitAll()
+                .antMatchers("/authenticate").permitAll()
+                .antMatchers("/create_account").permitAll()
                 .antMatchers(HttpMethod.GET,
-                        "/api/chat_app", "/api/chat/*").permitAll()
+                        "/chat_app", "/api/chat/*").permitAll()
                 .antMatchers(HttpMethod.POST,
-                        "/api//chat_app").hasAnyRole("USER", "ADMIN")
+                        "/chat_app").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT,
-                        "/api/chat_app/*").hasAnyRole("USER", "ADMIN")
+                        "/chat_app/*").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE,
-                        "/api/chat_app/*").hasAnyRole("ADMIN")
+                        "/chat_app/*").hasAnyRole("ADMIN")
                 .antMatchers("/**").denyAll()
                 .anyRequest().authenticated()
                 .and()
@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:*")
+                        .allowedOrigins("http://localhost:3000")
                         .allowedMethods("*");
             }
         };

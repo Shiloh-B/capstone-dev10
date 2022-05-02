@@ -1,8 +1,9 @@
 package capstone.security;
 
 import capstone.data.UserRepository;
-import capstone.models.User;
+import capstone.models.AppUser;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,37 +12,37 @@ import javax.validation.ValidationException;
 import java.util.List;
 
 @Service
-public class UserService {
+public class AppUserService implements UserDetailsService {
 
     private final UserRepository repository;
     private final PasswordEncoder encoder;
 
-    public UserService(UserRepository repository,
-                       PasswordEncoder encoder) {
+    public AppUserService(UserRepository repository,
+                          PasswordEncoder encoder) {
         this.repository = repository;
         this.encoder = encoder;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByUsername(username);
+        AppUser appUser = repository.findByUsername(username);
 
-        if (user == null || user.isDisabled()) {
+        if (appUser == null || !appUser.isEnabled()) {
             throw new UsernameNotFoundException(username + " not found");
         }
 
-        return user;
+        return appUser;
     }
 
-    public User add(String username, String password) {
+    public AppUser add(String username, String password) {
         validate(username);
         validatePassword(password);
 
         password = encoder.encode(password);
 
-        User user = new User(0, username, password, false, List.of("User"));
+        AppUser appUser = new AppUser(0, username, password, false, List.of("USER"));
 
-        return repository.add(user);
+        return repository.add(appUser);
     }
 
     private void validate(String username) {
