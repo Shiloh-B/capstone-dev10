@@ -7,14 +7,12 @@ public class Room {
 
     private int roomId;
     private String roomName;
+    private List<AppUser> userList; //List of appusers, e.g. (1, "nik", ...hash, false, roles)
+    private List<Message> messageList; //List of messages, e.g. "(1, "hello", timestamp, 1, 1)"
 
-    private List<AppUser> userList = new ArrayList<>();
-    private List<Message> messageList = new ArrayList<>();
-    public Room(int roomId, String roomName, List<AppUser> userList, List<Message> messageList) {
+    public Room(int roomId, String roomName) {
         this.roomId = roomId;
         this.roomName = roomName;
-        this.userList = userList;
-        this.messageList = messageList;
     }
 
     public int getRoomId() {
@@ -32,6 +30,22 @@ public class Room {
     public void setRoomName(String roomName) {
         this.roomName = roomName;
     }
+    public List<AppUser> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<AppUser> userList) {
+        this.userList = userList;
+    }
+
+    public List<Message> getMessageList() {
+        return messageList;
+    }
+
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
+    }
+
     //May need equals although not 100% certain as of now
     @Override
     public boolean equals(Object o) {

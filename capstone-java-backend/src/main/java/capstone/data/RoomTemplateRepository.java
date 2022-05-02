@@ -4,6 +4,8 @@ import capstone.data.mappers.RoomMapper;
 import capstone.models.Room;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.List;
+
 public class RoomTemplateRepository implements RoomRepository{
 
     private final JdbcTemplate jdbcTemplate;
@@ -12,6 +14,16 @@ public class RoomTemplateRepository implements RoomRepository{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
+    public List<Room> findByUserId(int AppUserId) {
+        return null;
+    }
+
+    /**
+     *
+     * @param roomId
+     * @return
+     */
     @Override
     public Room findById(int roomId) {
         final String sql = "select * from room where room_id = ?";
@@ -25,7 +37,7 @@ public class RoomTemplateRepository implements RoomRepository{
     }
 
     @Override
-    public Room update(int roomName) {
+    public Room update(Room room) {
         return null;
     }
 
