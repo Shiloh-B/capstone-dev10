@@ -17,6 +17,7 @@ public class AppUser extends User {
     private String username;
     private String passwordHash;
     private boolean isDisabled;
+    private List<Message> messages;
 
     private static final String AUTHORITY_PREFIX = "ROLE_";
 
@@ -67,5 +68,13 @@ public class AppUser extends User {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getAppUserId(), getUsername(), passwordHash, isDisabled, roles);
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 }
