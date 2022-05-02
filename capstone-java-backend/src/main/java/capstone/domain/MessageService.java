@@ -69,6 +69,10 @@ public class MessageService {
             return result;
         }
 
+        if(message.getMessageContent().trim().equals("")) {
+            result.addMessage("Message cannot be empty.", ResultType.INVALID);
+        }
+
         if (message.getRoomId() < 1) {
             result.addMessage("room id is required", ResultType.INVALID);
         }
