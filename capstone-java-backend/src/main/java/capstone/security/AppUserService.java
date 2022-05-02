@@ -1,6 +1,6 @@
 package capstone.security;
 
-import capstone.data.UserRepository;
+import capstone.data.AppUserRepository;
 import capstone.models.AppUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,10 +14,10 @@ import java.util.List;
 @Service
 public class AppUserService implements UserDetailsService {
 
-    private final UserRepository repository;
+    private final AppUserRepository repository;
     private final PasswordEncoder encoder;
 
-    public AppUserService(UserRepository repository,
+    public AppUserService(AppUserRepository repository,
                           PasswordEncoder encoder) {
         this.repository = repository;
         this.encoder = encoder;

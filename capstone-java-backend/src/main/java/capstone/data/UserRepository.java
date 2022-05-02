@@ -2,9 +2,7 @@ package capstone.data;
 
 import capstone.models.AppUser;
 
-import java.util.List;
-
-public interface UserRepository {
+public interface AppUserRepository {
 //    List<AppUser> findAll();
     AppUser findByUsername(String username);
     AppUser add(AppUser appUser);
