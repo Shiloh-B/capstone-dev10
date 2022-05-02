@@ -143,6 +143,8 @@ begin
     delete from message;
     alter table message auto_increment = 1;
     
+    delete from room_has_user;
+    
 	delete from `user`;
     alter table `user` auto_increment = 1;
     delete from `role`;
@@ -162,6 +164,9 @@ begin
     
     insert into room(room_id, `name`) values(1, "test room");
     insert into room(room_id, `name`) values(2, "test room 2");
+    
+    insert into room_has_user(room_id, user_id) values(1, 1);
+    insert into room_has_user(room_id, user_id) values(1, 2);
     
     insert into message(message, `timestamp`, room_id, user_id) values("test", "2022-04-30 12:12:12", 1, 1);
     insert into message(message, `timestamp`, room_id, user_id) values("test2", "2022-04-30 12:12:12", 1, 1);
