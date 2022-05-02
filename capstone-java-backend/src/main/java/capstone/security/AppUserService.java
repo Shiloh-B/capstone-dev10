@@ -1,5 +1,6 @@
 package capstone.security;
 
+import capstone.data.MessageRepository;
 import capstone.data.UserRepository;
 import capstone.models.AppUser;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,9 +16,11 @@ import java.util.List;
 public class AppUserService implements UserDetailsService {
 
     private final UserRepository repository;
+    private final MessageRepository messageRepository;
     private final PasswordEncoder encoder;
 
     public AppUserService(UserRepository repository,
+                          MessageRepository messageRepository,
                           PasswordEncoder encoder) {
         this.repository = repository;
         this.encoder = encoder;
@@ -30,6 +33,9 @@ public class AppUserService implements UserDetailsService {
         if (appUser == null || !appUser.isEnabled()) {
             throw new UsernameNotFoundException(username + " not found");
         }
+
+        // add messages to user
+        appUser.setMessages(messageRepository.findByUserId(appUser.getAppUserId()));
 
         return appUser;
     }
