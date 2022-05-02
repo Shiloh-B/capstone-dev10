@@ -15,6 +15,7 @@ public interface MessageRepository {
 
     boolean update(Message message);
 
-    @Transactional
     boolean deleteById(int messageId);
+
+    List<Message> findByUserId(int userId);
 }

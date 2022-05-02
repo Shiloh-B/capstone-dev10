@@ -47,7 +47,7 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
                 + "from message "
                 + "where user_id = ?;";
 
-        return jdbcTemplate.query(sql, new MessageMapper());
+        return jdbcTemplate.query(sql, new MessageMapper(), userId);
     }
 
     @Transactional
