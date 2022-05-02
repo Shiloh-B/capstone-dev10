@@ -1,14 +1,14 @@
 package capstone.data;
 
-import capstone.models.User;
+import capstone.models.AppUser;
 
 import java.util.List;
 
 public interface UserRepository {
-    List<User> findAll();
-    User findByUsername(String username);
-    User add(User user);
-    boolean update(User user);
-    boolean deleteByUsername(String username);
+//    List<AppUser> findAll();
+    AppUser findByUsername(String username);
+    AppUser add(AppUser appUser);
+    boolean update(AppUser appUser);
+//    boolean deleteByUsername(String username);
 
 }
