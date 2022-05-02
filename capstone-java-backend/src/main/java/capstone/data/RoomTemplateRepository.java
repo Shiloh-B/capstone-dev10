@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
-public class RoomTemplateRepository implements RoomRepository{
+public class RoomTemplateRepository implements RoomRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -21,7 +21,7 @@ public class RoomTemplateRepository implements RoomRepository{
     @Override
     public List<Room> findByUserId(int AppUserId) {
         final String sql = "select room_id, name from room where "
-//TODO unsure on this one
+    //TODO unsure on this one
         return null;
     }
 
@@ -47,13 +47,18 @@ public class RoomTemplateRepository implements RoomRepository{
         room.setRoomId(keyHolder.getKey().intValue());
         return room;
     }
-        @Override
-    public Room update(Room room) {
-        return null;
+
+    @Override
+    public boolean update(Room room) {
+        final String sql = "update room set "
+                + "name = ?, "
+                + "where room_id = ";
+        return jdbcTemplate.update(sql,
+                room.getRoomName(), room.getRoomId()) > 0;
     }
 
     @Override
     public boolean deleteByRoomId(int roomId) {
-        return false;
+        return jdbcTemplate.update("delete from room where room_id = ?;", roomId) > 0;
     }
 }
