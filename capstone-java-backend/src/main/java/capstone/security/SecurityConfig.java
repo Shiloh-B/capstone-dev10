@@ -32,6 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/create_account").permitAll()
                 .antMatchers("/user/*").permitAll()
+                .antMatchers("/message").permitAll()
+                .antMatchers("/message/*").permitAll()
                 .antMatchers(HttpMethod.GET,
                         "/chat_app", "/api/chat/*").permitAll()
                 .antMatchers(HttpMethod.POST,

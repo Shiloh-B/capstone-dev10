@@ -5,14 +5,14 @@ import java.sql.Timestamp;
 public class Message {
     private int messageId;
     private String messageContent;
-    private Timestamp timeStamp;
+    private Timestamp timestamp;
     private int roomId;
     private int userId;
 
-    public Message(int messageId, String messageContent, Timestamp timeStamp, int roomId, int userId) {
+    public Message(int messageId, String messageContent, Timestamp timestamp, int roomId, int userId) {
         this.messageId = messageId;
         this.messageContent = messageContent;
-        this.timeStamp = timeStamp;
+        this.timestamp = timestamp;
         this.roomId = roomId;
         this.userId = userId;
     }
@@ -42,11 +42,11 @@ public class Message {
     }
 
     public Timestamp getTimeStamp() {
-        return timeStamp;
+        return timestamp;
     }
 
     public void setTimeStamp(Timestamp timeStamp) {
-        this.timeStamp = timeStamp;
+        this.timestamp = timeStamp;
     }
 
     public int getRoomId() {

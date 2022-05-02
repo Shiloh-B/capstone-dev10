@@ -1,6 +1,7 @@
 package capstone.controllers;
 
 import capstone.domain.MessageService;
+import capstone.domain.Result;
 import capstone.models.Message;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
@@ -36,12 +37,12 @@ public class MessageController {
 
     @PostMapping
     public ResponseEntity<Message> add(@RequestBody Message message) {
-        Message testMessage = messageService.add(message);
-        if(testMessage == null) {
+        Result<Message> messageResult = messageService.add(message);
+        if(!messageResult.isSuccess()) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+        return new ResponseEntity<>(messageResult.getPayload(), HttpStatus.CREATED);
     }
 
     @PutMapping("/{messageId}")
@@ -50,12 +51,12 @@ public class MessageController {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
 
-        Message updateMessage = messageService.update(message);
-        if(updateMessage == null) {
+        Result<Message> messageResult = messageService.update(message);
+        if(!messageResult.isSuccess()) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(updateMessage, HttpStatus.OK);
+        return new ResponseEntity<>(messageResult.getPayload(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{messageId}")

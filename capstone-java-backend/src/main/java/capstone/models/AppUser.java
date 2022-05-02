@@ -78,4 +78,8 @@ public class AppUser extends User {
         this.messages = messages;
     }
 
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
 }
