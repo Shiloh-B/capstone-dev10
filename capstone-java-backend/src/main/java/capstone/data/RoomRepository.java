@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RoomRepository {
     List<Room> findByUserId(int AppUserId);
-    Room findById(int roomId);
+    Room findByRoomId(int roomId);
     Room add(Room room);
     Room update(Room room);
     @Transactional
