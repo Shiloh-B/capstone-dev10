@@ -19,6 +19,11 @@ public class RoomTemplateRepository implements RoomRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * Finds all Rooms a user is currently in.
+     * @param appUserId ID of an AppUser to get Rooms for.
+     * @return List of Rooms the AppUser with ID appUserId is in.
+     */
     @Override
     public List<Room> findByUserId(int appUserId) {
         final String sql = "select r.room_id, r.`name` from room r " +
@@ -26,14 +31,22 @@ public class RoomTemplateRepository implements RoomRepository {
                 "where rhu.user_id = ?;";
         return jdbcTemplate.query(sql, new RoomMapper(), appUserId);
     }
-
+    /**
+     * Returns a room given its RoomId
+     * @param roomId ID of Room to get from database.
+     * @return Room object found
+     */
     @Override
     public Room findByRoomId(int roomId) {
         final String sql = "select * from room where room_id = ?";
         Room room = jdbcTemplate.query(sql, new RoomMapper(), roomId).stream().findFirst().orElse(null);
         return room;
     }
-
+    /**
+     *
+     * @param room Room to add to database.
+     * @return Room added.
+     */
     @Override
     public Room add(Room room) {
         final String sql = "insert into room (`name`) values (?)";
@@ -50,7 +63,11 @@ public class RoomTemplateRepository implements RoomRepository {
         room.setRoomId(keyHolder.getKey().intValue());
         return room;
     }
-
+    /**
+     * Update a Room in database. (i.e., rename it.)
+     * @param room Room to update
+     * @return true if updated false if not.
+     */
     @Override
     public boolean update(Room room) {
         final String sql = "update room set "
@@ -59,7 +76,11 @@ public class RoomTemplateRepository implements RoomRepository {
         return jdbcTemplate.update(sql,
                 room.getRoomName(), room.getRoomId()) > 0;
     }
-
+    /**
+     * Delete a Room from database given its Id.
+     * @param roomId Id to delete room by.
+     * @return true if deleted.
+     */
     @Override
     public boolean deleteByRoomId(int roomId) {
         return jdbcTemplate.update("delete from room where room_id = ?;", roomId) > 0;
