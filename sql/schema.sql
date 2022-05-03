@@ -138,6 +138,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 delimiter //
 create procedure set_known_good_state()
 begin
+
+	delete from room_has_user;
 	delete from role_has_user;
     
     delete from message;
@@ -162,6 +164,12 @@ begin
     
     insert into room(room_id, `name`) values(1, "test room");
     insert into room(room_id, `name`) values(2, "test room 2");
+    insert into room(room_id, `name`) values(3, "test room 3");
+    insert into room(room_id, `name`) values(4, "test room 4");
+    
+    insert into room_has_user(room_id, user_id) values(1, 1);
+	insert into room_has_user(room_id, user_id) values(2, 1);
+	insert into room_has_user(room_id, user_id) values(3, 1);
     
     insert into message(message, `timestamp`, room_id, user_id) values("test", "2022-04-30 12:12:12", 1, 1);
     insert into message(message, `timestamp`, room_id, user_id) values("test2", "2022-04-30 12:12:12", 1, 1);
