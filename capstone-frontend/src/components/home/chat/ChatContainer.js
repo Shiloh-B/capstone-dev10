@@ -55,7 +55,7 @@ const ChatContainer = ({ currentRoom }) => {
     // check if the message is empty, if it is just return
     if(message === '' || !message) return;
 
-    
+
     let newMessages = [...messages];
     
 
@@ -70,6 +70,10 @@ const ChatContainer = ({ currentRoom }) => {
         username: user.username
     }
 
+      newMessages.push(messageToPost);
+      setMessages(newMessages);
+      setMessage('');
+
     // store the message
     fetch('http://localhost:8080/message', {
       method: 'POST',
@@ -80,16 +84,10 @@ const ChatContainer = ({ currentRoom }) => {
       body: JSON.stringify(messageToPost)
     }).then((res) => {
       if(res.status !== 201) {
+        // alert message here that the message didn't send
         return null;
       }
-
-      return res.json();
-    }).then((data) => {
-      if(data) {
-        newMessages.push(data)
-        setMessages(newMessages);
-        setMessage('');
-      }
+      return;
     });
   }
 
