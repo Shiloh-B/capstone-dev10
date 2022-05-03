@@ -51,6 +51,11 @@ const ChatContainer = ({ currentRoom }) => {
 
   const submitMessage = (e) => {
     e.preventDefault();
+
+    // check if the message is empty, if it is just return
+    if(message === '' || !message) return;
+
+    
     let newMessages = [...messages];
     
 

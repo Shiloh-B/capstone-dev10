@@ -170,9 +170,13 @@ begin
     
     insert into user(user_id, username, password_hash, disabled) values(1, "nik", "$2a$10$yxFMZBgKlAMaOR7qwIFMmuvvmi.w0EgEV0AnTgV/mdVzJi.TEofOG", 0);
     insert into user(user_id, username, password_hash, disabled) values(2, "shiloh", "$2a$10$yxFMZBgKlAMaOR7qwIFMmuvvmi.w0EgEV0AnTgV/mdVzJi.TEofOG", 0);
+    insert into user(user_id, username, password_hash, disabled) values(3, "becky", "$2a$10$yxFMZBgKlAMaOR7qwIFMmuvvmi.w0EgEV0AnTgV/mdVzJi.TEofOG", 0);
+    insert into user(user_id, username, password_hash, disabled) values(4, "sam", "$2a$10$yxFMZBgKlAMaOR7qwIFMmuvvmi.w0EgEV0AnTgV/mdVzJi.TEofOG", 0);
 
     insert into role_has_user(role_id, user_id) values(2, 1);
     insert into role_has_user(role_id, user_id) values(2, 2);
+    insert into role_has_user(role_id, user_id) values(2, 3);
+    insert into role_has_user(role_id, user_id) values(2, 4);
     
     insert into room(room_id, `name`) values(1, "Main");
     insert into room(room_id, `name`) values(2, "test room 2");
