@@ -15,7 +15,7 @@ class AppUserTemplateRepositoryTest {
     @Autowired
     KnownGoodState knownGoodState;
     @Autowired
-    AppUserJdbcTemplateRepository repository;
+    UserTemplateRepository repository;
     @BeforeEach
     void setup() {
         knownGoodState.set();
