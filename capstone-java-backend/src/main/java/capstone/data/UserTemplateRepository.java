@@ -22,12 +22,6 @@ public class UserTemplateRepository implements  UserRepository{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    @Override
-//    public List<AppUser> findAll() {
-//        final String sql = "select user_id, username, password_hash, disabled from `chat_app`.`user` limit 1000";
-//         return jdbcTemplate.query(sql, new AppUserMapper());
-//    }
-
     @Override
     public AppUser findByUsername(String username) {
 

@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -41,6 +42,15 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
         return message;
     }
 
+    public List<Message> findByUserId(int userId) {
+        final String sql = "select message_id, message, timestamp, room_id, user_id "
+                + "from message "
+                + "where user_id = ?;";
+
+        return jdbcTemplate.query(sql, new MessageMapper(), userId);
+    }
+
+    @Transactional
     @Override
     public Message add(Message message) {
         final String sql = "insert into message (message, timestamp, room_id, user_id) "
@@ -64,6 +74,7 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
         return message;
     }
 
+    @Transactional
     @Override
     public boolean update(Message message) {
         final String sql = "update message set "

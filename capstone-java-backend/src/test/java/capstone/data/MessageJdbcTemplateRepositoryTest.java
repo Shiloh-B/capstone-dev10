@@ -43,6 +43,12 @@ class MessageJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByUserId() {
+        List<Message> messages = repository.findByUserId(1);
+        assertTrue(messages.size() > 0);
+    }
+
+    @Test
     void shouldAdd() {
         Message message = makeMessage();
         Message actual = repository.add(message);
