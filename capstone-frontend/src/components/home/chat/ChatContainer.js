@@ -52,9 +52,7 @@ const ChatContainer = ({ currentRoom }) => {
   const submitMessage = (e) => {
     e.preventDefault();
     let newMessages = [...messages];
-    newMessages.push({ username: user.username, message: message})
-    setMessages(newMessages);
-    setMessage('');
+    
 
     // emit broadcast
     socket.emit('chat message', {username: user.username, message: message});
@@ -62,13 +60,10 @@ const ChatContainer = ({ currentRoom }) => {
     const messageToPost = {
         messageId: 0,
         messageContent: message,
-        timestamp: Date.now(),
         roomId: currentRoom.roomId,
         userId: user.userId,
         username: user.username
     }
-
-    console.log(typeof messageToPost.timestamp);
 
     // store the message
     fetch('http://localhost:8080/message', {
@@ -79,7 +74,17 @@ const ChatContainer = ({ currentRoom }) => {
       },
       body: JSON.stringify(messageToPost)
     }).then((res) => {
-      console.log(res);
+      if(res.status !== 201) {
+        return null;
+      }
+
+      return res.json();
+    }).then((data) => {
+      if(data) {
+        newMessages.push(data)
+        setMessages(newMessages);
+        setMessage('');
+      }
     });
   }
 

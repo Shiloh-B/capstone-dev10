@@ -85,7 +85,7 @@ public class MessageService {
             result.addMessage("user id is required", ResultType.INVALID);
         }
 
-        if (message.getTimeStamp() == 0) {
+        if (message.getTimeStamp() == null) {
             result.addMessage("timestamp is required", ResultType.INVALID);
         }
 

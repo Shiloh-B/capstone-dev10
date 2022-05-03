@@ -96,7 +96,7 @@ class MessageServiceTest {
     Message makeMessage() {
         Message message = new Message();
         message.setMessageContent("TEST");
-        message.setTimeStamp(10000);
+        message.setTimeStamp(Timestamp.valueOf("2022-05-03 12:12:12"));
         message.setRoomId(1);
         message.setUserId(1);
         return message;

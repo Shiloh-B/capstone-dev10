@@ -12,7 +12,7 @@ public class MessageMapper implements RowMapper {
         return new Message(
                 resultSet.getInt("message_id"),
                 resultSet.getString("message"),
-                resultSet.getInt("timestamp"),
+                resultSet.getTimestamp("timestamp"),
                 resultSet.getInt("room_id"),
                 resultSet.getInt("user_id"),
                 resultSet.getString("username")
