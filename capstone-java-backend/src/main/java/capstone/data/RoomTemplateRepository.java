@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+
 @Repository
 public class RoomTemplateRepository implements RoomRepository {
 
@@ -21,6 +22,7 @@ public class RoomTemplateRepository implements RoomRepository {
 
     /**
      * Finds all Rooms a user is currently in.
+     *
      * @param appUserId ID of an AppUser to get Rooms for.
      * @return List of Rooms the AppUser with ID appUserId is in.
      */
@@ -31,8 +33,10 @@ public class RoomTemplateRepository implements RoomRepository {
                 "where rhu.user_id = ?;";
         return jdbcTemplate.query(sql, new RoomMapper(), appUserId);
     }
+
     /**
      * Returns a room given its RoomId
+     *
      * @param roomId ID of Room to get from database.
      * @return Room object found
      */
@@ -42,7 +46,9 @@ public class RoomTemplateRepository implements RoomRepository {
         Room room = jdbcTemplate.query(sql, new RoomMapper(), roomId).stream().findFirst().orElse(null);
         return room;
     }
+
     /**
+     * Adds a Room to database.
      *
      * @param room Room to add to database.
      * @return Room added.
@@ -63,8 +69,10 @@ public class RoomTemplateRepository implements RoomRepository {
         room.setRoomId(keyHolder.getKey().intValue());
         return room;
     }
+
     /**
      * Update a Room in database. (i.e., rename it.)
+     *
      * @param room Room to update
      * @return true if updated false if not.
      */
@@ -76,8 +84,10 @@ public class RoomTemplateRepository implements RoomRepository {
         return jdbcTemplate.update(sql,
                 room.getRoomName(), room.getRoomId()) > 0;
     }
+
     /**
      * Delete a Room from database given its Id.
+     *
      * @param roomId Id to delete room by.
      * @return true if deleted.
      */
