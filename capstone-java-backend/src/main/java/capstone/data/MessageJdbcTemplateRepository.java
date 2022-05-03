@@ -50,6 +50,14 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
         return jdbcTemplate.query(sql, new MessageMapper(), userId);
     }
 
+    public List<Message> findByRoomId(int roomId) {
+        final String sql = "select message_id, message, timestamp, room_id, user_id "
+                + "from message "
+                + "where room_id = ?;";
+
+        return jdbcTemplate.query(sql, new MessageMapper(), roomId);
+    }
+
     @Transactional
     @Override
     public Message add(Message message) {

@@ -49,6 +49,12 @@ class MessageJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByRoomId() {
+        List<Message> messages = repository.findByRoomId(1);
+        assertTrue(messages.size() > 0);
+    }
+
+    @Test
     void shouldAdd() {
         Message message = makeMessage();
         Message actual = repository.add(message);

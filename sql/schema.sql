@@ -167,7 +167,7 @@ begin
     insert into role_has_user(role_id, user_id) values(2, 1);
     insert into role_has_user(role_id, user_id) values(2, 2);
     
-    insert into room(room_id, `name`) values(1, "test room");
+    insert into room(room_id, `name`) values(1, "Main");
     insert into room(room_id, `name`) values(2, "test room 2");
     insert into room(room_id, `name`) values(3, "test room 3");
     insert into room(room_id, `name`) values(4, "test room 4");
