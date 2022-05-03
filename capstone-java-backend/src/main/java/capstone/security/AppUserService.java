@@ -3,6 +3,7 @@ package capstone.security;
 import capstone.data.MessageRepository;
 import capstone.data.UserRepository;
 import capstone.models.AppUser;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -59,6 +60,10 @@ public class AppUserService implements UserDetailsService {
 
         if (username.length() > 50) {
             throw new ValidationException("username must be less than 50 characters");
+        }
+
+        if(repository.findByUsername(username) != null) {
+            throw new DuplicateKeyException("username must be unique");
         }
     }
 
