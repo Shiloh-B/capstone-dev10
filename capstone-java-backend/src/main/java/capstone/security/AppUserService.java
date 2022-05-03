@@ -53,6 +53,8 @@ public class AppUserService implements UserDetailsService {
         if (username.length() > 50) {
             throw new ValidationException("username must be less than 50 characters");
         }
+
+
     }
 
     private void validatePassword(String password) {
