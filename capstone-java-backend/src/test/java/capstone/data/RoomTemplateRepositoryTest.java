@@ -38,23 +38,22 @@ class RoomTemplateRepositoryTest {
 
     @Test
     void add() {
-        Room toAdd = new Room(3, "nik");
+        Room toAdd = new Room(0, "nik");
         Room result = repository.add(toAdd);
         assertEquals(result, toAdd);
     }
 
     @Test
     void update() {
-        Room toUpdate = new Room();
-        toUpdate.setRoomId(4);
-        toUpdate.setRoomName("four");
-        Room four = repository.add(toUpdate);
-        assertTrue(repository.update(four));
+        Room toUpdate = new Room(2, "test room update");
+        assertTrue(repository.update(toUpdate));
+        assertEquals("test room update", repository.findByRoomId(2).getRoomName());
+
     }
 
     @Test
     void deleteByRoomId() {
-        assertTrue(repository.deleteByRoomId(3));
+        assertTrue(repository.deleteByRoomId(4));
         assertFalse(repository.deleteByRoomId(7));
     }
 }

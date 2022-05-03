@@ -54,8 +54,8 @@ public class RoomTemplateRepository implements RoomRepository {
     @Override
     public boolean update(Room room) {
         final String sql = "update room set "
-                + "`name` = ?, "
-                + "where room_id = ?";
+                + "`name` = ? "
+                + "where room_id = ?;";
         return jdbcTemplate.update(sql,
                 room.getRoomName(), room.getRoomId()) > 0;
     }
