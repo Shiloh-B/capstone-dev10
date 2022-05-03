@@ -35,6 +35,11 @@ public class MessageController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    @GetMapping("/room/{roomId}")
+    public List<Message> findByRoomId(@PathVariable int roomId) {
+        return messageService.findByRoomId(roomId);
+    }
+
     @PostMapping
     public ResponseEntity<Message> add(@RequestBody Message message) {
         Result<Message> messageResult = messageService.add(message);

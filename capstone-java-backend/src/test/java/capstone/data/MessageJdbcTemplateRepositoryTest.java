@@ -82,6 +82,7 @@ class MessageJdbcTemplateRepositoryTest {
         message.setTimeStamp(Timestamp.valueOf("2022-04-30 12:12:12"));
         message.setRoomId(1);
         message.setUserId(1);
+        message.setUsername("nik");
         return message;
     }
 }

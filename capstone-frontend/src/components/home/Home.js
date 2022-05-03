@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { io } from 'socket.io-client';
 import SocketContext from '../../context/SocketContext';
 import UserContext from '../../context/UserContext';
@@ -12,6 +12,10 @@ const Home = () => {
 
   const [socket, setSocket] = useContext(SocketContext);
   const [user, setUser] = useContext(UserContext);
+  const [currentRoom, setCurrentRoom] = useState({
+    roomId: 1,
+    name: "Main"
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,8 +34,8 @@ const Home = () => {
     <div className='landing-container'>
       <Header />
       <div className='room-chat-container'>
-        <RoomContainer />
-        <ChatContainer />
+        <RoomContainer setCurrentRoom={setCurrentRoom} />
+        <ChatContainer currentRoom={currentRoom} />
       </div>
     </div>
   )

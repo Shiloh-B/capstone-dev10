@@ -4,13 +4,32 @@ import UserContext from '../../../context/UserContext';
 import SocketContext from '../../../context/SocketContext';
 import MessageContainer from './MessageContainer';
 
-const ChatContainer = () => {
+const ChatContainer = ({ currentRoom }) => {
 
   const [user, setUser] = useContext(UserContext);
   const [socket, setSocket] = useContext(SocketContext);
   const [message, setMessage] = useState('');
 
   const [messages, setMessages] = useState([]);
+
+  // populate messages
+  useEffect(() => {
+    fetch(`http://localhost:8080/message/room/${currentRoom.roomId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => {
+      if(!res.status === 200) {
+        return null;
+      }
+      return res.json();
+    }).then((data) => {
+      if(data) {
+        setMessages(data);
+      }
+    })
+  }, []);
 
   useEffect(() => {
     if(socket == null) return;
@@ -22,6 +41,7 @@ const ChatContainer = () => {
     });
 
   }, [socket, messages]);
+
 
   const handleMessageChange = (e) => {
     setMessage(e.target.value);

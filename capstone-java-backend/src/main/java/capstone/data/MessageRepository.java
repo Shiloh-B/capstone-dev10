@@ -11,6 +11,8 @@ public interface MessageRepository {
 
     Message findById(int messageId);
 
+    List<Message> findByRoomId(int roomId);
+
     Message add(Message message);
 
     boolean update(Message message);

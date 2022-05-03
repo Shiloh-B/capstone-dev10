@@ -19,6 +19,10 @@ public class MessageService {
         return messageRepository.findAll();
     }
 
+    public List<Message> findByRoomId(int roomId) {
+        return messageRepository.findByRoomId(roomId);
+    }
+
     public Message findById(int messageId) {
         return messageRepository.findById(messageId);
     }
