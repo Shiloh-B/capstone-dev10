@@ -32,8 +32,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/create_account").permitAll()
                 .antMatchers("/user/*").permitAll()
-                .antMatchers("/message").permitAll()
-                .antMatchers("/message/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/message", "/message/*")
+                .hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/message", "/message/*")
+                .hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/message", "/message/*")
+                .hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/message", "/message/*")
+                .hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.GET,
                         "/chat_app", "/api/chat/*").permitAll()
                 .antMatchers(HttpMethod.POST,
