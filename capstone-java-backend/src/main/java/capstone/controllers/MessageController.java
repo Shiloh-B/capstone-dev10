@@ -42,6 +42,7 @@ public class MessageController {
 
     @PostMapping
     public ResponseEntity<Message> add(@RequestBody Message message) {
+        System.out.println(message);
         Result<Message> messageResult = messageService.add(message);
         if(!messageResult.isSuccess()) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

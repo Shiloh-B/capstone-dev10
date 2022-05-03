@@ -29,7 +29,32 @@ const Home = () => {
 
     let s = io('https://6db3-2601-447-8101-6a00-ecde-fd59-5e29-38e9.ngrok.io');
     setSocket(s);
+
+    getUserDetails(jwtDecode(localStorage.getItem("token")).sub);
+
   }, []);
+
+  const getUserDetails = (username) => {
+    fetch(`http://localhost:8080/user/${username}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => {
+      if(res.status != 200) {
+        return;
+      }
+
+      return res.json();
+    }).then((data) => {
+      if(data) {
+        setUser({
+          username: data.username,
+          userId: data.appUserId
+        });
+      }
+    });
+  }
+
   return (
     <div className='landing-container'>
       <Header />

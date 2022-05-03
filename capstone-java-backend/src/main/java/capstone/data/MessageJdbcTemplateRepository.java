@@ -69,7 +69,7 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, message.getMessageContent());
-            ps.setTimestamp(2, message.getTimeStamp());
+            ps.setLong(2, message.getTimeStamp());
             ps.setInt(3, message.getRoomId());
             ps.setInt(4, message.getUserId());
             ps.setString(5, message.getUsername());

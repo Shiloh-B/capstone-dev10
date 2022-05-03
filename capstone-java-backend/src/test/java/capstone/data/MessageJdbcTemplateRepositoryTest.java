@@ -79,7 +79,7 @@ class MessageJdbcTemplateRepositoryTest {
     private Message makeMessage() {
         Message message = new Message();
         message.setMessageContent("TEST");
-        message.setTimeStamp(Timestamp.valueOf("2022-04-30 12:12:12"));
+        message.setTimeStamp(10000);
         message.setRoomId(1);
         message.setUserId(1);
         message.setUsername("nik");

@@ -20,13 +20,15 @@ const ChatContainer = ({ currentRoom }) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
     }).then((res) => {
-      if(!res.status === 200) {
+      if(res.status != 200) {
         return null;
       }
       return res.json();
     }).then((data) => {
       if(data) {
         setMessages(data);
+      } else {
+        setMessages([]);
       }
     })
   }, []);
@@ -56,6 +58,29 @@ const ChatContainer = ({ currentRoom }) => {
 
     // emit broadcast
     socket.emit('chat message', {username: user.username, message: message});
+
+    const messageToPost = {
+        messageId: 0,
+        messageContent: message,
+        timestamp: Date.now(),
+        roomId: currentRoom.roomId,
+        userId: user.userId,
+        username: user.username
+    }
+
+    console.log(typeof messageToPost.timestamp);
+
+    // store the message
+    fetch('http://localhost:8080/message', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(messageToPost)
+    }).then((res) => {
+      console.log(res);
+    });
   }
 
   return (
