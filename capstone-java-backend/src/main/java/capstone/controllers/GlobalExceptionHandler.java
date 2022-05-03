@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleException(DuplicateKeyException ex) {
 
         return new ResponseEntity<ErrorResponse>(
-                new ErrorResponse("Object with same Key already exists"),
+                new ErrorResponse("Object with the same key already exists"),
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
