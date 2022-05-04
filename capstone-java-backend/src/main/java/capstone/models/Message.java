@@ -5,24 +5,23 @@ import java.sql.Timestamp;
 public class Message {
     private int messageId;
     private String messageContent;
-    private Timestamp timeStamp;
+    private Timestamp timestamp;
     private int roomId;
     private int userId;
+    private String username;
 
-    public Message(int messageId, String messageContent, Timestamp timeStamp, int roomId, int userId) {
+    public Message(int messageId, String messageContent, Timestamp timestamp, int roomId, int userId, String username) {
         this.messageId = messageId;
         this.messageContent = messageContent;
-        this.timeStamp = timeStamp;
+        this.timestamp = timestamp;
         this.roomId = roomId;
         this.userId = userId;
+        this.username = username;
     }
 
     public Message() {
         // default constructor
     }
-
-//    private Room room;
-//    private User user;
 
 
     public int getMessageId() {
@@ -42,11 +41,11 @@ public class Message {
     }
 
     public Timestamp getTimeStamp() {
-        return timeStamp;
+        return timestamp;
     }
 
-    public void setTimeStamp(Timestamp timeStamp) {
-        this.timeStamp = timeStamp;
+    public Timestamp setTimeStamp(Timestamp timeStamp) {
+        return this.timestamp = timeStamp;
     }
 
     public int getRoomId() {
@@ -65,23 +64,24 @@ public class Message {
         this.userId = userId;
     }
 
-//    public Room getRoom() {
-//        return room;
-//    }
-//
-//    public void setRoom(Room room) {
-//        this.room = room;
-//    }
-//
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-//
-    // dk if room and user objects are needed here
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
 
+    @Override
+    public String toString() {
+        return "Message{" +
+                "messageId=" + messageId +
+                ", messageContent='" + messageContent + '\'' +
+                ", timestamp=" + timestamp +
+                ", roomId=" + roomId +
+                ", userId=" + userId +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }

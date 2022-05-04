@@ -11,10 +11,13 @@ public interface MessageRepository {
 
     Message findById(int messageId);
 
+    List<Message> findByRoomId(int roomId);
+
     Message add(Message message);
 
     boolean update(Message message);
 
-    @Transactional
     boolean deleteById(int messageId);
+
+    List<Message> findByUserId(int userId);
 }

@@ -66,13 +66,34 @@ const Login = () => {
     }).then((data) => {
       if(data.jwt_token) {
         localStorage.setItem("token", data.jwt_token);
-        setUser({username: user.username});
+        getUserDetails();
+        // setUser({username: user.username});
         navigate('/home');
       } else {
         setErrors('Wrong username or password.');
       }
     });
+  }
 
+  const getUserDetails = () => {
+    fetch(`http://localhost:8080/user/${user.username}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => {
+      if(res.status != 200) {
+        return;
+      }
+
+      return res.json();
+    }).then((data) => {
+      if(data) {
+        setUser({
+          username: data.username,
+          userId: data.appUserId
+        });
+      }
+    });
   }
 
   const handleSignUp = (e) => {

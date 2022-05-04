@@ -2,7 +2,7 @@ package capstone.data;
 
 import capstone.models.AppUser;
 
-public interface AppUserRepository {
+public interface UserRepository {
 //    List<AppUser> findAll();
     AppUser findByUsername(String username);
     AppUser add(AppUser appUser);
