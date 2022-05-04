@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react'
 
-const Room = ({ roomName }) => {
+const Room = ({ roomName, isActive }) => {
 
-  const [isActive, setIsActive] = useState(false);
+  const [activeRoom, setActiveRoom] = useState(isActive);
 
   useEffect(() => {
     if(roomName === 'Main') {
-      setIsActive(true);
+      setActiveRoom(true);
     }
-  }, []);
+  }, [activeRoom]);
 
   const handleRoomChange = (e) => {
     // function that will eventually swap a room to active
-    setIsActive(true);
+
+    // setIsActive(true);
   }
 
   return (

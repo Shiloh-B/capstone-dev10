@@ -35,6 +35,27 @@ code {
   background-color: #004183;
 }
 
+.room-list-container {
+  height: 80vh;
+}
+
+.room-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.room-input {
+  margin: .5em auto;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  padding: .5em;
+  font-size: 1.25em;
+  width: 80%;
+}
+
 /* Room */
 
 .single-room-container {

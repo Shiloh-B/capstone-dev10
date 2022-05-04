@@ -23,7 +23,7 @@ const Home = () => {
 
     setUser({username: jwtDecode(localStorage.getItem("token")).sub});
 
-    let s = io('https://6db3-2601-447-8101-6a00-ecde-fd59-5e29-38e9.ngrok.io');
+    let s = io('http://localhost:3003');
     setSocket(s);
   }, []);
   return (
