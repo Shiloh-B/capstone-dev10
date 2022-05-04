@@ -14,7 +14,8 @@ const Home = () => {
   const [user, setUser] = useContext(UserContext);
   const [currentRoom, setCurrentRoom] = useState({
     roomId: 1,
-    name: "Main"
+    name: "Main",
+    isActive: true
   });
   const navigate = useNavigate();
 

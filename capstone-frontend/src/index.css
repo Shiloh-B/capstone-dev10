@@ -37,6 +37,7 @@ code {
 
 .room-list-container {
   height: 80vh;
+  overflow-y: auto;
 }
 
 .room-form {
