@@ -31,7 +31,7 @@ const ChatContainer = ({ currentRoom }) => {
         setMessages([]);
       }
     })
-  }, []);
+  }, [currentRoom]);
 
   useEffect(() => {
     if(socket == null) return;
