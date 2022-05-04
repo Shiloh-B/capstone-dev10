@@ -1,5 +1,5 @@
 // express server in here
-
+const jwtDecode = require('jwt-decode');
 const io = require('socket.io')(3003, {
   cors: {
     origin: '*'
@@ -7,10 +7,21 @@ const io = require('socket.io')(3003, {
 });
 
 io.on('connection', (socket) => {
-  console.log(`user ${socket.id} has joined.`);
 
   socket.on('chat message', (msg) => {
     socket.broadcast.emit('chat message', msg);
-    console.log(msg);
   })
 });
+
+io.use((socket, next) => {
+  if(socket.handshake.auth.token) {
+    socket.username = getUsernameFromToken(socket.handshake.auth.token);
+    next();
+  } else {
+    next(new Error('No token received.'));
+  }
+})
+
+const getUsernameFromToken = (token) => {
+  return jwtDecode(token).sub;
+}

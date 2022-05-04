@@ -60,7 +60,7 @@ const ChatContainer = ({ currentRoom }) => {
     
 
     // emit broadcast
-    socket.emit('chat message', {username: user.username, message: message});
+    socket.emit('chat message', {username: user.username, messageContent: message});
 
     const messageToPost = {
         messageId: 0,
@@ -91,9 +91,13 @@ const ChatContainer = ({ currentRoom }) => {
     });
   }
 
+  const scrollContainer = (ref) => {
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  }
+
   return (
     <div className='chat-container'>
-      <MessageContainer messages={messages} />
+      <MessageContainer messages={messages} scrollContainer={scrollContainer} />
       <form className='message-form' autoComplete='off' onSubmit={submitMessage}>
         <TextField label='Say Hello!' variant='outlined' className='message-input' name='message' value={message} aria-autocomplete='false' onChange={handleMessageChange} />
         <Button variant='contained' className='submit-message-button' type='submit'>Send</Button>
