@@ -1,6 +1,7 @@
 package capstone.controllers;
 
 import capstone.models.AppUser;
+import capstone.models.UserInfo;
 import capstone.security.AppUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +22,20 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<AppUser> findByUsername(@PathVariable String username) {
+    public ResponseEntity<UserInfo> findByUsername(@PathVariable String username) {
         AppUser appUser = (AppUser) appUserService.loadUserByUsername(username);
         if(appUser == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
+        // create our UserInfo object and set the fields
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername(appUser.getUsername());
+        userInfo.setMessages(appUser.getMessages());
+        userInfo.setAppUserId(appUser.getAppUserId());
+
         // remove the password hash from the user before sending back
-        return new ResponseEntity<>(appUser, HttpStatus.OK);
+        return new ResponseEntity<>(userInfo, HttpStatus.OK);
     }
 
 }
