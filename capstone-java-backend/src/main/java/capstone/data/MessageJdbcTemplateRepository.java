@@ -25,14 +25,14 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
 
     @Override
     public List<Message> findAll() {
-        final String sql = "select message_id, message, timestamp, room_id, user_id "
+        final String sql = "select message_id, message, timestamp, room_id, user_id, username "
                 + "from message limit 1000;";
         return jdbcTemplate.query(sql, new MessageMapper());
     }
 
     @Override
     public Message findById(int messageId) {
-        final String sql = "select message_id, message, timestamp, room_id, user_id "
+        final String sql = "select message_id, message, timestamp, room_id, user_id, username "
                 + "from message "
                 + "where message_id = ?;";
 
@@ -43,18 +43,27 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
     }
 
     public List<Message> findByUserId(int userId) {
-        final String sql = "select message_id, message, timestamp, room_id, user_id "
+        final String sql = "select message_id, message, timestamp, room_id, user_id, username "
                 + "from message "
                 + "where user_id = ?;";
 
         return jdbcTemplate.query(sql, new MessageMapper(), userId);
     }
 
+    public List<Message> findByRoomId(int roomId) {
+        final String sql = "select message_id, message, timestamp, room_id, user_id, username "
+                + "from message "
+                + "where room_id = ? "
+                + "order by timestamp;";
+
+        return jdbcTemplate.query(sql, new MessageMapper(), roomId);
+    }
+
     @Transactional
     @Override
     public Message add(Message message) {
-        final String sql = "insert into message (message, timestamp, room_id, user_id) "
-                + " values (?,?,?,?);";
+        final String sql = "insert into message (message, timestamp, room_id, user_id, username) "
+                + " values (?,?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -63,6 +72,7 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
             ps.setTimestamp(2, message.getTimeStamp());
             ps.setInt(3, message.getRoomId());
             ps.setInt(4, message.getUserId());
+            ps.setString(5, message.getUsername());
             return ps;
         }, keyHolder);
 
@@ -81,7 +91,8 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
                 + "message = ?, "
                 + "timestamp = ?, "
                 + "room_id = ?, "
-                + "user_id = ? "
+                + "user_id = ?, "
+                + "username = ? "
                 + "where message_id = ?;";
 
         return jdbcTemplate.update(sql,
@@ -89,6 +100,7 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
                 message.getTimeStamp(),
                 message.getRoomId(),
                 message.getUserId(),
+                message.getUsername(),
                 message.getMessageId()) > 0;
     }
 

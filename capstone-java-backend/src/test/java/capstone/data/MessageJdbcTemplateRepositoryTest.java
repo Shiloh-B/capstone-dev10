@@ -49,6 +49,12 @@ class MessageJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByRoomId() {
+        List<Message> messages = repository.findByRoomId(1);
+        assertTrue(messages.size() > 0);
+    }
+
+    @Test
     void shouldAdd() {
         Message message = makeMessage();
         Message actual = repository.add(message);
@@ -73,9 +79,10 @@ class MessageJdbcTemplateRepositoryTest {
     private Message makeMessage() {
         Message message = new Message();
         message.setMessageContent("TEST");
-        message.setTimeStamp(Timestamp.valueOf("2022-04-30 12:12:12"));
+        message.setTimeStamp(Timestamp.valueOf("2022-05-03 12:12:12"));
         message.setRoomId(1);
         message.setUserId(1);
+        message.setUsername("nik");
         return message;
     }
 }

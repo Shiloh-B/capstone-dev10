@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -35,8 +37,16 @@ public class MessageController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    @GetMapping("/room/{roomId}")
+    public List<Message> findByRoomId(@PathVariable int roomId) {
+        return messageService.findByRoomId(roomId);
+    }
+
     @PostMapping
     public ResponseEntity<Message> add(@RequestBody Message message) {
+        // add the timestamp
+        message.setTimeStamp(Timestamp.valueOf(LocalDateTime.now()));
+
         Result<Message> messageResult = messageService.add(message);
         if(!messageResult.isSuccess()) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
