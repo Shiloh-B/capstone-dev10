@@ -2,28 +2,33 @@ import React, { useState } from 'react'
 import Room from './Room';
 import JoinRoom from './JoinRoom';
 
-const RoomContainer = () => {
+const RoomContainer = ({ setCurrentRoom }) => {
 
-  const [rooms, setRooms] = useState(['Main']);
   const [roomToJoin, setRoomToJoin] = useState('');
-  const [isActive, setIsActive] = useState(true);
+  const [rooms, setRooms] = useState([{
+    roomId: 1,
+    name: "Main"
+  }]);
 
-  const roomList = rooms.map((room, key) => <Room roomName={room} key={key} isActive={false} setIsActive={setIsActive} />);
+  const roomList = rooms.map((room, key) => <Room room={room} key={key} setCurrentRoom={setCurrentRoom} />);
 
   const handleChange = (e) => {
     setRoomToJoin(e.target.value);
   }
 
-  const handleChangeActive = (e) => {
-    
-  }
-
   const handleJoinRoom = (e) => {
     e.preventDefault();
-    // socket stuff here
+    // socket stuff
+
+    for(let i = 0; i < rooms.length; i++) {
+      if(rooms[i].name.toLocaleLowerCase() == roomToJoin.toLocaleLowerCase()) {
+        setRoomToJoin('');
+        return;
+      }
+    }
 
     let newRooms = [...rooms];
-    newRooms.push(roomToJoin);
+    newRooms.push({roomId: 0, name: roomToJoin});
     setRooms(newRooms);
 
     setRoomToJoin('');

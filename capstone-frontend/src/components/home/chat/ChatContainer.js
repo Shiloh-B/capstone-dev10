@@ -4,13 +4,34 @@ import UserContext from '../../../context/UserContext';
 import SocketContext from '../../../context/SocketContext';
 import MessageContainer from './MessageContainer';
 
-const ChatContainer = () => {
+const ChatContainer = ({ currentRoom }) => {
 
   const [user, setUser] = useContext(UserContext);
   const [socket, setSocket] = useContext(SocketContext);
   const [message, setMessage] = useState('');
 
   const [messages, setMessages] = useState([]);
+
+  // populate messages
+  useEffect(() => {
+    fetch(`http://localhost:8080/message/room/${currentRoom.roomId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => {
+      if(res.status != 200) {
+        return null;
+      }
+      return res.json();
+    }).then((data) => {
+      if(data) {
+        setMessages(data);
+      } else {
+        setMessages([]);
+      }
+    })
+  }, []);
 
   useEffect(() => {
     if(socket == null) return;
@@ -23,19 +44,51 @@ const ChatContainer = () => {
 
   }, [socket, messages]);
 
+
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
   }
 
   const submitMessage = (e) => {
     e.preventDefault();
+
+    // check if the message is empty, if it is just return
+    if(message === '' || !message) return;
+
+
     let newMessages = [...messages];
-    newMessages.push({ username: user.username, message: message})
-    setMessages(newMessages);
-    setMessage('');
+    
 
     // emit broadcast
     socket.emit('chat message', {username: user.username, message: message});
+
+    const messageToPost = {
+        messageId: 0,
+        messageContent: message,
+        roomId: currentRoom.roomId,
+        userId: user.userId,
+        username: user.username
+    }
+
+      newMessages.push(messageToPost);
+      setMessages(newMessages);
+      setMessage('');
+
+    // store the message
+    fetch('http://localhost:8080/message', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(messageToPost)
+    }).then((res) => {
+      if(res.status !== 201) {
+        // alert message here that the message didn't send
+        return null;
+      }
+      return;
+    });
   }
 
   return (

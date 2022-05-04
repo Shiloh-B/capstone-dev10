@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react'
+import RoomContainer from './RoomContainer';
 
-const Room = ({ roomName, isActive }) => {
+const Room = ({ room, setCurrentRoom }) => {
 
-  const [activeRoom, setActiveRoom] = useState(isActive);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    if(roomName === 'Main') {
-      setActiveRoom(true);
+    if(room.name === 'Main') {
+      setIsActive(true);
     }
-  }, [activeRoom]);
+  }, []);
 
   const handleRoomChange = (e) => {
     // function that will eventually swap a room to active
-
-    // setIsActive(true);
+    setIsActive(true);
+    setCurrentRoom(room);
   }
 
   return (
-    <div className={isActive ? 'single-room-container active-room' : 'single-room-container'} name={roomName} onClick={handleRoomChange}>
-      <h1 className='single-room-name'>{roomName}</h1>
+    <div className={isActive ? 'single-room-container active-room' : 'single-room-container'} name={room.name} onClick={handleRoomChange}>
+      <h1 className='single-room-name'>{room.name}</h1>
     </div>
   )
 }

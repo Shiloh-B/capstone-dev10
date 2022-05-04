@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { io } from 'socket.io-client';
 import SocketContext from '../../context/SocketContext';
 import UserContext from '../../context/UserContext';
@@ -12,6 +12,10 @@ const Home = () => {
 
   const [socket, setSocket] = useContext(SocketContext);
   const [user, setUser] = useContext(UserContext);
+  const [currentRoom, setCurrentRoom] = useState({
+    roomId: 1,
+    name: "Main"
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,13 +29,38 @@ const Home = () => {
 
     let s = io('http://localhost:3003');
     setSocket(s);
+
+    getUserDetails(jwtDecode(localStorage.getItem("token")).sub);
+
   }, []);
+
+  const getUserDetails = (username) => {
+    fetch(`http://localhost:8080/user/${username}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => {
+      if(res.status != 200) {
+        return;
+      }
+
+      return res.json();
+    }).then((data) => {
+      if(data) {
+        setUser({
+          username: data.username,
+          userId: data.appUserId
+        });
+      }
+    });
+  }
+
   return (
     <div className='landing-container'>
       <Header />
       <div className='room-chat-container'>
-        <RoomContainer />
-        <ChatContainer />
+        <RoomContainer setCurrentRoom={setCurrentRoom} />
+        <ChatContainer currentRoom={currentRoom} />
       </div>
     </div>
   )
