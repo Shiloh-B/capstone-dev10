@@ -60,7 +60,7 @@ const ChatContainer = ({ currentRoom }) => {
     
 
     // emit broadcast
-    socket.emit('chat message', {username: user.username, message: message});
+    socket.emit('chat message', {username: user.username, messageContent: message});
 
     const messageToPost = {
         messageId: 0,

@@ -27,10 +27,11 @@ const Home = () => {
 
     setUser({username: jwtDecode(localStorage.getItem("token")).sub});
 
-    let s = io('http://localhost:3003');
+    let s = io('http://localhost:3003', { auth: { token: localStorage.getItem('token') }});
     setSocket(s);
 
     getUserDetails(jwtDecode(localStorage.getItem("token")).sub);
+    s.emit('chat message', {messageContent: `User ${jwtDecode(localStorage.getItem("token")).sub} has joined.`});
 
   }, []);
 
