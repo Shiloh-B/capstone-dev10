@@ -21,8 +21,8 @@ function App() {
         <UserContext.Provider value={[user, setUser]}>
           <Router>
             <Routes>
-              <Route path="*" element={<NotFound />} />
-              <Route path='/home' element={<Home />} />
+              <Route path="*" element={<NotFound />} />=
+              <Route path='/home' element={<Home />} />=
               <Route path ='/auth' element={<Login />} />
             </Routes>
           </Router>
