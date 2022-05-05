@@ -3,8 +3,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import UserContext from '../../../context/UserContext';
 import SocketContext from '../../../context/SocketContext';
 import MessageContainer from './MessageContainer';
+import jwtDecode from 'jwt-decode';
+import { io } from 'socket.io-client';
 
-const ChatContainer = ({ currentRoom }) => {
+const ChatContainer = ({ currentRoom, getUserDetails }) => {
 
   const [user, setUser] = useContext(UserContext);
   const [socket, setSocket] = useContext(SocketContext);
@@ -12,8 +14,12 @@ const ChatContainer = ({ currentRoom }) => {
 
   const [messages, setMessages] = useState([]);
 
-  // populate messages
   useEffect(() => {
+
+    let s = io('http://localhost:3003', { auth: { token: localStorage.getItem('token') }});
+    setSocket(s);
+    getUserDetails(jwtDecode(localStorage.getItem("token")).sub);
+
     fetch(`http://localhost:8080/message/room/${currentRoom.roomId}`, {
       method: 'GET',
       headers: {
@@ -30,19 +36,24 @@ const ChatContainer = ({ currentRoom }) => {
       } else {
         setMessages([]);
       }
+    }).then(() => {
+      s.emit('chat message', {messageContent: `User ${jwtDecode(localStorage.getItem("token")).sub} has joined.`});
     })
   }, []);
 
   useEffect(() => {
-    if(socket == null) return;
-
+    // make sure the socket and messages are populated
+    if(!socket || messages.length === 0) return;
     socket.on('chat message', (msg) => {
+
+      // make sure we don't keep displaying the same user joining
+      
       let newMessages = [...messages];
       newMessages.push(msg);
       setMessages(newMessages);
-    });
 
-  }, [socket, messages]);
+    });
+  }, [messages, socket])
 
 
   const handleMessageChange = (e) => {
@@ -53,7 +64,7 @@ const ChatContainer = ({ currentRoom }) => {
     e.preventDefault();
 
     // check if the message is empty, if it is just return
-    if(message === '' || !message) return;
+    if(message.trim() === '' || !message) return;
 
 
     let newMessages = [...messages];
@@ -95,15 +106,20 @@ const ChatContainer = ({ currentRoom }) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
   }
 
-  return (
-    <div className='chat-container'>
-      <MessageContainer messages={messages} scrollContainer={scrollContainer} />
-      <form className='message-form' autoComplete='off' onSubmit={submitMessage}>
-        <TextField label='Say Hello!' variant='outlined' className='message-input' name='message' value={message} aria-autocomplete='false' onChange={handleMessageChange} />
-        <Button variant='contained' className='submit-message-button' type='submit'>Send</Button>
-      </form>
-    </div>
-  )
+  if(socket) {
+    return (
+      <div className='chat-container'>
+        <MessageContainer messages={messages} scrollContainer={scrollContainer} />
+        <form className='message-form' autoComplete='off' onSubmit={submitMessage}>
+          <TextField label='Say Hello!' variant='outlined' className='message-input' name='message' value={message} aria-autocomplete='false' onChange={handleMessageChange} />
+          <Button variant='contained' className='submit-message-button' type='submit'>Send</Button>
+        </form>
+      </div>
+    )
+  } else {
+    return <></>;
+  }
+  
 }
 
 export default ChatContainer
