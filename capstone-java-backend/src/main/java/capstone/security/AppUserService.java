@@ -1,7 +1,12 @@
 package capstone.security;
 
+<<<<<<< HEAD
+=======
+import capstone.data.MessageRepository;
+>>>>>>> development
 import capstone.data.UserRepository;
 import capstone.models.AppUser;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,10 +20,19 @@ import java.util.List;
 public class AppUserService implements UserDetailsService {
 
     private final UserRepository repository;
+<<<<<<< HEAD
     private final PasswordEncoder encoder;
 
     public AppUserService(UserRepository repository,
+=======
+    private final MessageRepository messageRepository;
+    private final PasswordEncoder encoder;
+
+    public AppUserService(UserRepository repository,
+                          MessageRepository messageRepository,
+>>>>>>> development
                           PasswordEncoder encoder) {
+        this.messageRepository = messageRepository;
         this.repository = repository;
         this.encoder = encoder;
     }
@@ -30,6 +44,9 @@ public class AppUserService implements UserDetailsService {
         if (appUser == null || !appUser.isEnabled()) {
             throw new UsernameNotFoundException(username + " not found");
         }
+
+        // add messages to user
+        appUser.setMessages(messageRepository.findByUserId(appUser.getAppUserId()));
 
         return appUser;
     }
@@ -52,6 +69,10 @@ public class AppUserService implements UserDetailsService {
 
         if (username.length() > 50) {
             throw new ValidationException("username must be less than 50 characters");
+        }
+
+        if(repository.findByUsername(username) != null) {
+            throw new DuplicateKeyException("username must be unique");
         }
     }
 

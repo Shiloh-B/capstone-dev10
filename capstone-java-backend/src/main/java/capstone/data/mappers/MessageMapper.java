@@ -14,7 +14,8 @@ public class MessageMapper implements RowMapper {
                 resultSet.getString("message"),
                 resultSet.getTimestamp("timestamp"),
                 resultSet.getInt("room_id"),
-                resultSet.getInt("user_id")
+                resultSet.getInt("user_id"),
+                resultSet.getString("username")
         );
     }
 }
