@@ -29,7 +29,6 @@ class RoomServiceTest {
         assertTrue(list.size()>0);
     }
 
-
     @Test
     void findByRoomId() {
         Room expected = makeRoom();
