@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -22,6 +24,9 @@ class RoomServiceTest {
 
     @Test
     void findByUserId() {
+        when(repository.findByUserId(1)).thenReturn(List.of(makeRoom()));
+        List<Room> list = service.findByUserId(1);
+        assertTrue(list.size()>0);
     }
 
 
@@ -51,11 +56,25 @@ class RoomServiceTest {
         assertNotEquals(ResultType.SUCCESS, result.getType());
     }
     @Test
-    void update() {
+    void shouldUpdate() {
+        Room toUpdate = makeRoom();
+        toUpdate.setRoomName("updated");
+        when(repository.update(toUpdate)).thenReturn(true);
+        Result<Room> actual = service.update(toUpdate);
+        assertEquals(ResultType.SUCCESS, actual.getType());
     }
 
     @Test
+    void shouldNotUpdateInvalid(){
+        Room dontUpdate = makeRoom();
+        dontUpdate.setRoomName("");
+        Result<Room> actual = service.update(dontUpdate);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+    @Test
     void deleteByRoomId() {
+        when(repository.deleteByRoomId(1)).thenReturn(true);
+        assertTrue(service.deleteByRoomId(1));
     }
 
     private Room makeRoom() {
