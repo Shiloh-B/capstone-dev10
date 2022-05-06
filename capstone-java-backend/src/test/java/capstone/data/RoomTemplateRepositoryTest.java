@@ -32,8 +32,7 @@ class RoomTemplateRepositoryTest {
     @Test
     void findByRoomId() {
         Room result = repository.findByRoomId(1);
-        System.out.println(result.getRoomName());
-        assertTrue(result.getRoomName().equalsIgnoreCase("test room"));
+        assertTrue(result.getRoomName().equalsIgnoreCase("Main"));
     }
 
     @Test
