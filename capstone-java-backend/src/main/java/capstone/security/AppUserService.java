@@ -1,9 +1,6 @@
 package capstone.security;
 
-<<<<<<< HEAD
-=======
 import capstone.data.MessageRepository;
->>>>>>> development
 import capstone.data.UserRepository;
 import capstone.models.AppUser;
 import org.springframework.dao.DuplicateKeyException;
@@ -20,17 +17,10 @@ import java.util.List;
 public class AppUserService implements UserDetailsService {
 
     private final UserRepository repository;
-<<<<<<< HEAD
-    private final PasswordEncoder encoder;
-
-    public AppUserService(UserRepository repository,
-=======
     private final MessageRepository messageRepository;
     private final PasswordEncoder encoder;
-
     public AppUserService(UserRepository repository,
                           MessageRepository messageRepository,
->>>>>>> development
                           PasswordEncoder encoder) {
         this.messageRepository = messageRepository;
         this.repository = repository;
