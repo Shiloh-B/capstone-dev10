@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  chat-app:
+    image: shilohballard/chatapp:1.0
+    environment:
+      - API_URL=http://chatappapi-env.eba-9xbqhr9k.us-east-1.elasticbeanstalk.com
+      - SOCKET_URL=http://chatappsocket-env-1.eba-pbwdxjp3.us-east-1.elasticbeanstalk.com
+    ports:
+      - 80:80

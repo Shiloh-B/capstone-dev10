@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState, Suspense } from 'react'
 import { io } from 'socket.io-client';
 import SocketContext from '../../context/SocketContext';
 import UserContext from '../../context/UserContext';
@@ -28,15 +28,10 @@ const Home = () => {
 
     setUser({username: jwtDecode(localStorage.getItem("token")).sub});
 
-    let s = io('http://localhost:3003');
-    setSocket(s);
-
-    getUserDetails(jwtDecode(localStorage.getItem("token")).sub);
-
   }, []);
 
   const getUserDetails = (username) => {
-    fetch(`http://localhost:8080/user/${username}`, {
+    fetch(`${window.API_URL}/user/${username}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -59,9 +54,9 @@ const Home = () => {
   return (
     <div className='landing-container'>
       <Header />
-      <div className='room-chat-container'>
+      <div className='room-chat-container'> 
         <RoomContainer setCurrentRoom={setCurrentRoom} />
-        <ChatContainer currentRoom={currentRoom} />
+        <ChatContainer currentRoom={currentRoom} getUserDetails={getUserDetails} />
       </div>
     </div>
   )
