@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  chat-app-api:
+    image: shilohballard/chat-app-api:1.0
+    environment:
+      - DB_URL=jdbc:mysql://chatapp.ctagfwr7va6k.us-east-1.rds.amazonaws.com:3306/chat_app
+      - DB_USERNAME=root
+      - DB_PASSWORD=chatapppassword
+    ports:
+      - 8080:8080

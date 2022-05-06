@@ -1,0 +1,7 @@
+version: "3.9"
+
+services:
+  chat-app:
+    image: shilohballard/chat-app-socket:1.0
+    ports:
+      - 3003:3003
