@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,14 +43,41 @@ class MessageControllerTest {
     }
 
     @Test
-    void add() {
+    void shouldAdd() {
+        Message toAdd = makeMessage();
+        toAdd.setUsername("nik");
+        ResponseEntity<Message> responseEntity = messageController.add(toAdd);
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
     }
+    @Test
+    void shouldNotAddInvalidMessage() {
+        Message toNotAdd = makeMessage();
+        toNotAdd.setMessageId(1); // Cannot set message id
+        Message blankMessageToNotAdd = makeMessage();
+        blankMessageToNotAdd.setMessageContent(""); // cannot be blank
+        Message messageWithoutRoomId = makeMessage();
+        messageWithoutRoomId.setRoomId(0); // must set Room Id to add message
+        ResponseEntity<Message> responseEntityOne = messageController.add(toNotAdd);
+        ResponseEntity<Message> responseEntityTwo = messageController.add(blankMessageToNotAdd);
+        ResponseEntity<Message> responseEntityThree = messageController.add(messageWithoutRoomId);
 
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntityOne.getStatusCode()); //error caught in add service
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntityTwo.getStatusCode()); // error caught in validate service
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntityThree.getStatusCode()); // error caught in validate service
+    }
     @Test
     void update() {
     }
 
     @Test
     void deleteById() {
+    }
+    private Message makeMessage() {
+        Message message = new Message();
+        message.setMessageContent("TEST");
+        message.setTimeStamp(Timestamp.valueOf("2022-05-03 12:12:12"));
+        message.setRoomId(1);
+        message.setUserId(1);
+        return message;
     }
 }

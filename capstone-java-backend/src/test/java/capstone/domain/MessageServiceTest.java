@@ -93,7 +93,7 @@ class MessageServiceTest {
         assertEquals(ResultType.INVALID, actual.getType());
     }
 
-    Message makeMessage() {
+    private Message makeMessage() {
         Message message = new Message();
         message.setMessageContent("TEST");
         message.setTimeStamp(Timestamp.valueOf("2022-05-03 12:12:12"));
