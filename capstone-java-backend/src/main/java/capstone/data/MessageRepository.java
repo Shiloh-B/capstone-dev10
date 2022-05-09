@@ -20,4 +20,6 @@ public interface MessageRepository {
     boolean deleteById(int messageId);
 
     List<Message> findByUserId(int userId);
+
+    Message findByUsernameAndMessage(String username, String message);
 }

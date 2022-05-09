@@ -27,6 +27,19 @@ public class MessageController {
         return messageService.findAll();
     }
 
+    @GetMapping("/find/{username}/{messageContent}")
+    public ResponseEntity<Message> findByUsernameAndMessage(@PathVariable String username,
+                                                            @PathVariable String messageContent) {
+
+        Message message = messageService.findByUsernameAndMessage(username, messageContent);
+
+        if(message == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+        else return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
     @GetMapping("/{messageId}")
     public ResponseEntity<Message> findById(@PathVariable int messageId) {
         Message message = messageService.findById(messageId);

@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/create_account").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/*")
                 .hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.GET, "/message", "/message/*")
+                .antMatchers(HttpMethod.GET, "/message", "/message/*", "/message/find/*/*")
                 .hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/message", "/message/*")
                 .hasAnyRole("USER", "ADMIN")
