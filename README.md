@@ -6,18 +6,26 @@
 * [Technology](#technology)
 * [Launch](#launch)
 
+
 ## Overview
 This app was created for chat messaging.
 
+
 ## Features
-* Account and message data is storable and retrieveable.
-* Hostable on AWS
+* Private accounts
+* Group messaging
+* Message deleting (for admins)
 
 ## Technology
-Project is creeated using SQL, Java, JS, AWS, Web sockets, React MUI, and Node.
+Project is created using SQL, Java, JS, AWS, Web sockets, React MUI, and Node.
+
 
 ## Launch 
-To launch this project, install it locally with npm.
+To launch this project, clone this repo to your desktop.
+Go to the project's root directory and install dependencies with npm.
+Once installed, use `npm start` to start the application.
+Access the application at localhost:3000.
+
 ```
 $ cd ../capstone-dev10
 $ npm install
