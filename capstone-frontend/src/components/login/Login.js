@@ -46,7 +46,7 @@ const Login = () => {
     e.preventDefault();
     
     // call auth
-    fetch('http://localhost:8080/authenticate', {
+    fetch(`${window.API_URL}/authenticate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ const Login = () => {
   }
 
   const getUserDetails = () => {
-    fetch(`http://localhost:8080/user/${user.username}`, {
+    fetch(`${window.API_URL}/user/${user.username}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -105,7 +105,7 @@ const Login = () => {
       return;
     }
     
-    fetch('http://localhost:8080/create_account', {
+    fetch(`${window.API_URL}/create_account`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -1,7 +1,8 @@
+import jwtDecode from 'jwt-decode';
 import React, { useEffect, useRef } from 'react'
 import Message from './Message';
 
-const MessageContainer = ({ messages, scrollContainer }) => {
+const MessageContainer = ({ messages, scrollContainer, setMessages }) => {
 
   const logs = messages.map((message, key) => <Message message={message} key={key} /> );
   const messageContainerRef = useRef(null);

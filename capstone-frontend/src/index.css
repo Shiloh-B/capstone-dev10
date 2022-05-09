@@ -76,6 +76,7 @@ code {
 .single-message-container {
   width: 100%;
   border-bottom: 4px solid #1976d2;
+  position: relative;
 }
 
 .server-message {
@@ -104,6 +105,58 @@ code {
 .submit-message-button {
   width: 10%;
   height: 60%;
+}
+
+.delete-message-button {
+  position: absolute;
+  font-weight: bold;
+  font-size: 1.25em;
+  color: red;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+}
+
+.delete-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  color: black;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  color: #aaa;
+  float: right;
+  font-size: 1.75em;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.delete-modal-content {
+  position: relative;
+  background-color: #fefefe;
+  padding: 15px;
+  border: 1px solid #888;
+  width: 50%; 
 }
 
 /* Login */

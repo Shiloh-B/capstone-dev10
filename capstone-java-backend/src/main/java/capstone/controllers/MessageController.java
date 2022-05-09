@@ -27,10 +27,23 @@ public class MessageController {
         return messageService.findAll();
     }
 
+    @GetMapping("/find/{username}/{messageContent}")
+    public ResponseEntity<Message> findByUsernameAndMessage(@PathVariable String username,
+                                                            @PathVariable String messageContent) {
+
+        Message message = messageService.findByUsernameAndMessage(username, messageContent);
+
+        if(message == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+        else return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
     @GetMapping("/{messageId}")
     public ResponseEntity<Message> findById(@PathVariable int messageId) {
         Message message = messageService.findById(messageId);
-        if(message == null) {
+        if (message == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
@@ -48,7 +61,7 @@ public class MessageController {
         message.setTimeStamp(Timestamp.valueOf(LocalDateTime.now()));
 
         Result<Message> messageResult = messageService.add(message);
-        if(!messageResult.isSuccess()) {
+        if (!messageResult.isSuccess()) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
@@ -57,12 +70,12 @@ public class MessageController {
 
     @PutMapping("/{messageId}")
     public ResponseEntity<Message> update(@RequestBody Message message, @PathVariable int messageId) {
-        if(message.getMessageId() != messageId) {
+        if (message.getMessageId() != messageId) {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
 
         Result<Message> messageResult = messageService.update(message);
-        if(!messageResult.isSuccess()) {
+        if (!messageResult.isSuccess()) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
@@ -71,6 +84,9 @@ public class MessageController {
 
     @DeleteMapping("/{messageId}")
     public ResponseEntity<Void> deleteById(@PathVariable int messageId) {
+        if (!messageService.deleteById(messageId)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         messageService.deleteById(messageId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

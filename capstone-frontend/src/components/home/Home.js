@@ -27,15 +27,10 @@ const Home = () => {
 
     setUser({username: jwtDecode(localStorage.getItem("token")).sub});
 
-    // let s = io('http://localhost:3003', { auth: { token: localStorage.getItem('token') }});
-    // setSocket(s);
-
-    // getUserDetails(jwtDecode(localStorage.getItem("token")).sub);
-
   }, []);
 
   const getUserDetails = (username) => {
-    fetch(`http://localhost:8080/user/${username}`, {
+    fetch(`${window.API_URL}/user/${username}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
