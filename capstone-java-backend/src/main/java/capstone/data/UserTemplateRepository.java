@@ -1,5 +1,6 @@
 package capstone.data;
 
+import capstone.controllers.AuthController;
 import capstone.data.mappers.AppUserMapper;
 import capstone.models.AppUser;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,9 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @Repository
-public class UserTemplateRepository implements  UserRepository{
+public class UserTemplateRepository implements  UserRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -22,23 +24,17 @@ public class UserTemplateRepository implements  UserRepository{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    @Override
-//    public List<AppUser> findAll() {
-//        final String sql = "select user_id, username, password_hash, disabled from `chat_app`.`user` limit 1000";
-//         return jdbcTemplate.query(sql, new AppUserMapper());
-//    }
-
     @Override
     public AppUser findByUsername(String username) {
 
         List<String> roles = getRolesByUsername(username);
 
         final String sql = "select user_id, username, password_hash, disabled " +
-                "from `chat_app`.`user`"+
+                "from `chat_app`.`user`" +
                 "where username = ?";
         AppUser appUser = jdbcTemplate.query(sql, new AppUserMapper(roles), username).stream()
                 .findFirst().orElse(null);
-        if(appUser != null){
+        if (appUser != null) {
             //TODO RoomUser list here
         }
         return appUser;
@@ -110,5 +106,22 @@ public class UserTemplateRepository implements  UserRepository{
                 + "inner join user u on u.user_id = ur.user_id "
                 + "where u.username = ?;";
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
+    }
+
+
+    public AppUser addToken(AppUser appUser) {
+        final String sql = "insert into token(token) values (?)";
+
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, AuthController.getJwtToken();
+            return ps;
+                }
+        );
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
+        return appUser;
     }
 }

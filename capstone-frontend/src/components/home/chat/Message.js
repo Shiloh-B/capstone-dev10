@@ -7,7 +7,12 @@ const Message = ({ message }) => {
 
   return (
     <div className={user.username === message.username ? 'single-message-container user-message' : 'single-message-container server-message'}>
-      <h1 className='single-message'>{message.username}: {message.message}</h1>
+      {
+        message.username ? 
+        <h1 className='single-message'>{message.username}: {message.messageContent}</h1> :
+        <h1 className='single-message'>{message.messageContent}</h1>
+      }
+      
     </div>
   )
 }

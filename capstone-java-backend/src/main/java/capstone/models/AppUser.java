@@ -17,6 +17,8 @@ public class AppUser extends User {
     private String username;
     private String passwordHash;
     private boolean isDisabled;
+    private List<Message> messages;
+    private String token;
 
     private static final String AUTHORITY_PREFIX = "ROLE_";
 
@@ -68,4 +70,26 @@ public class AppUser extends User {
     public int hashCode() {
         return Objects.hash(super.hashCode(), getAppUserId(), getUsername(), passwordHash, isDisabled, roles);
     }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+
 }

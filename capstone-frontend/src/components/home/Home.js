@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState, Suspense } from 'react'
 import { io } from 'socket.io-client';
 import SocketContext from '../../context/SocketContext';
 import UserContext from '../../context/UserContext';
@@ -12,6 +12,10 @@ const Home = () => {
 
   const [socket, setSocket] = useContext(SocketContext);
   const [user, setUser] = useContext(UserContext);
+  const [currentRoom, setCurrentRoom] = useState({
+    roomId: 1,
+    name: "Main"
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,15 +27,40 @@ const Home = () => {
 
     setUser({username: jwtDecode(localStorage.getItem("token")).sub});
 
-    let s = io('https://6db3-2601-447-8101-6a00-ecde-fd59-5e29-38e9.ngrok.io');
-    setSocket(s);
+    // let s = io('http://localhost:3003', { auth: { token: localStorage.getItem('token') }});
+    // setSocket(s);
+
+    // getUserDetails(jwtDecode(localStorage.getItem("token")).sub);
+
   }, []);
+
+  const getUserDetails = (username) => {
+    fetch(`http://localhost:8080/user/${username}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => {
+      if(res.status != 200) {
+        return;
+      }
+
+      return res.json();
+    }).then((data) => {
+      if(data) {
+        setUser({
+          username: data.username,
+          userId: data.appUserId
+        });
+      }
+    });
+  }
+
   return (
     <div className='landing-container'>
       <Header />
-      <div className='room-chat-container'>
-        <RoomContainer />
-        <ChatContainer />
+      <div className='room-chat-container'> 
+        <RoomContainer setCurrentRoom={setCurrentRoom} />
+        <ChatContainer currentRoom={currentRoom} getUserDetails={getUserDetails} />
       </div>
     </div>
   )
