@@ -184,6 +184,9 @@ begin
     insert into room(room_id, `name`) values(4, "test room 4");
     
     insert into room_has_user(room_id, user_id) values(1, 1);
+    insert into room_has_user(room_id, user_id) values(1, 2);
+    insert into room_has_user(room_id, user_id) values(1, 3);
+    insert into room_has_user(room_id, user_id) values(1, 4);
 	insert into room_has_user(room_id, user_id) values(2, 1);
 	insert into room_has_user(room_id, user_id) values(3, 1);
     

@@ -20,7 +20,7 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @GetMapping("/{AppUserId}")
+    @GetMapping("/user/{AppUserId}")
     public ResponseEntity<List<Room>> findByUserId(@PathVariable int AppUserId) {
         List<Room> list = roomService.findByUserId(AppUserId);
         if (list == null) {
@@ -38,6 +38,16 @@ public class RoomController {
         return new ResponseEntity<>(room, HttpStatus.OK);
     }
 
+    @GetMapping("/name/{roomName}")
+    public ResponseEntity<Room> findByRoomName(@PathVariable String roomName) {
+        Room room = roomService.findByRoomName(roomName);
+        if(room == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(room, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Room> add(@RequestBody Room room) {
         Result<Room> roomResult = roomService.add(room);
@@ -45,6 +55,13 @@ public class RoomController {
             return new ResponseEntity<>(roomResult.getPayload(), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(roomResult.getPayload(), HttpStatus.OK);
+    }
+
+    @PostMapping("/roomhasuser/{roomId}/{userId}")
+    public boolean addRoomHasUser(@PathVariable int roomId, @PathVariable int userId) {
+        if(roomService.addRoomhasUser(roomId, userId)) return true;
+
+        return false;
     }
 
     @PutMapping

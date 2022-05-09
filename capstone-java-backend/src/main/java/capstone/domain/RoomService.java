@@ -23,6 +23,16 @@ public class RoomService {
         return roomRepository.findByRoomId(roomId);
     }
 
+    public Room findByRoomName(String name) {
+        return roomRepository.findByRoomName(name);
+    }
+
+    public boolean addRoomhasUser(int roomId, int userId) {
+        if(roomRepository.addRoomHasUser(roomId, userId)) return true;
+
+        return false;
+    }
+
     public Result<Room> add(Room room) {
         Result<Room> result = validate(room);
         if (!result.isSuccess()) {
@@ -35,6 +45,11 @@ public class RoomService {
 
     public Result<Room> update(Room room) {
         Result<Room> result = validate(room);
+
+        if (room.getRoomId() < 1) {
+            result.addMessage("Room id invalid", ResultType.INVALID);
+        }
+
         if (!result.isSuccess()) {
             return result;
         }
@@ -59,9 +74,6 @@ public class RoomService {
         }
         if (room.getRoomName().equals("")) {
             result.addMessage("Room name cannot be empty", ResultType.INVALID);
-        }
-        if (room.getRoomId() < 1) {
-            result.addMessage("Room id invalid", ResultType.INVALID);
         }
         return result;
     }

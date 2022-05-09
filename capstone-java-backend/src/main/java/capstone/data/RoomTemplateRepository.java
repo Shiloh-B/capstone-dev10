@@ -47,6 +47,28 @@ public class RoomTemplateRepository implements RoomRepository {
         return room;
     }
 
+    @Override
+    public Room findByRoomName(String name) {
+        final String sql = "select * from room where `name` = ?;";
+        return jdbcTemplate.query(sql, new RoomMapper(), name).stream().findFirst().orElse(null);
+    }
+
+    @Override
+    public boolean addRoomHasUser(int roomId, int userId) {
+        final String sql = "insert into room_has_user (room_id, user_id) values (?, ?);";
+
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.NO_GENERATED_KEYS);
+            ps.setInt(1, roomId);
+            ps.setInt(2, userId);
+            return ps;
+        });
+
+        if(rowsAffected <= 0) return false;
+
+        return true;
+    }
+
     /**
      * Adds a Room to database.
      *
