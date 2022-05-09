@@ -23,7 +23,7 @@ public class RoomController {
     @GetMapping("/{AppUserId}")
     public ResponseEntity<List<Room>> findByUserId(@PathVariable int AppUserId) {
         List<Room> list = roomService.findByUserId(AppUserId);
-        if (list == null) {
+        if (list.size() == 0) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
@@ -50,7 +50,7 @@ public class RoomController {
     @PutMapping
     public  ResponseEntity<Room> update(@RequestBody Room room){
         Result<Room> roomResult = roomService.update(room);
-        if(roomResult.getType()== ResultType.INVALID){
+        if(roomResult.getType() == ResultType.INVALID){
             return new ResponseEntity<>(roomResult.getPayload(), HttpStatus.BAD_REQUEST);
         }
         if(roomResult.getType()==ResultType.NOT_FOUND){
