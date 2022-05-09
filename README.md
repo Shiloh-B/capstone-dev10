@@ -1,30 +1,30 @@
 # chat.app
-
-# Table of contents
+## Table of contents
 * [Overview](#overview)
 * [Features](#features)
 * [Technology](#technology)
 * [Launch](#launch)
 
 
-## Overview
+### Overview
 This app was created for chat messaging.
 
 
-## Features
+### Features
 * Private accounts
 * Group messaging
 * Message deleting (for admins)
 
-## Technology
+
+### Technology
 Project is created using SQL, Java, JS, AWS, Web sockets, React MUI, and Node.
 
 
-## Launch 
-To launch this project, clone this repo to your desktop.
-Go to the project's root directory and install dependencies with npm.
-Once installed, use `npm start` to start the application.
-Access the application at localhost:3000.
+### Launch 
+To launch this project, clone this repo to your desktop.<br />
+Go to the project's root directory and install dependencies with npm.<br />
+Once installed, use `npm start` to start the application.<br />
+Access the application at localhost:3000.<br />
 
 ```
 $ cd ../capstone-dev10
