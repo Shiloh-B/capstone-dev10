@@ -1,10 +1,10 @@
 # Dev10 Capstone Project - chat.app
 
 # Table of contents
-1. Overview
-2. Features
-3. Technology
-4. Launch
+* [Overview](#overview)
+* [Features](#features)
+* [Technology](#technology)
+* [Launch](#launch)
 
 ## Overview
 This app was created for chat messaging.
@@ -14,4 +14,12 @@ This app was created for chat messaging.
 * Hostable on AWS
 
 ## Technology
-Application uses SQL, Java, JS, AWS, Web sockets, React MUI, and Node.
+Project is creeated using SQL, Java, JS, AWS, Web sockets, React MUI, and Node.
+
+## Launch 
+To launch this project, install it locally with npm.
+```
+$ cd ../capstone-dev10
+$ npm install
+$ npm start
+```
