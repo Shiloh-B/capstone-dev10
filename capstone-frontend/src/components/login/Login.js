@@ -127,7 +127,7 @@ const Login = () => {
           setErrors('Oops. Something went wrong.');
         }
       } else {
-        setErrors('Could not create account at this time.');
+        setErrors('Username already exists.');
       }
     });
   }
