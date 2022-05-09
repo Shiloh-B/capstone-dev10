@@ -1,4 +1,4 @@
-# Dev10 Capstone Project - chat.app
+# chat.app
 
 # Table of contents
 * [Overview](#overview)
