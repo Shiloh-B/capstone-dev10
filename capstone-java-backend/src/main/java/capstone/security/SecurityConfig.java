@@ -52,6 +52,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/room", "/room/*")
                 .hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET,
+                        "/chat_app", "/api/chat/*").permitAll()
+                .antMatchers(HttpMethod.POST,
+                        "/chat_app").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT,
+                        "/chat_app/*").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE,
+                        "/chat_app/*").hasAnyRole("ADMIN")
+
                 .antMatchers("/**").denyAll()
                 .anyRequest().authenticated()
                 .and()
