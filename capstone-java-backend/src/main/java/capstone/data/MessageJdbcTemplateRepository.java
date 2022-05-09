@@ -50,6 +50,18 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
         return jdbcTemplate.query(sql, new MessageMapper(), userId);
     }
 
+    @Override
+    public Message findByUsernameAndMessage(String username, String message) {
+        final String sql = "select message_id, message, timestamp, room_id, user_id, username " +
+                "from message " +
+                "where message = ? and username = ?;";
+
+        Message foundMessage = (Message) jdbcTemplate.query(sql, new MessageMapper(), message, username)
+                .stream().findFirst().orElse(null);
+
+        return foundMessage;
+    }
+
     public List<Message> findByRoomId(int roomId) {
         final String sql = "select message_id, message, timestamp, room_id, user_id, username "
                 + "from message "
