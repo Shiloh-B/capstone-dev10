@@ -13,7 +13,9 @@ code {
 }
 
 /* Landing Page */
-
+.home-link {
+  cursor: pointer;
+}
 .landing-container {
   height: 100vh;
   display: flex;
@@ -25,6 +27,10 @@ code {
   display: flex;
   flex-direction: row;
   flex: 1 1 auto;
+}
+
+.burger-menu-header {
+  display: none !important;
 }
 
 /* Room Container */
@@ -220,4 +226,83 @@ code {
   text-align: left;
   color: red;
   margin: 0;
+}
+
+/* media queries */
+
+@media screen and (max-height: 800px) {
+  .message-container {
+    margin-bottom: 1em;
+  }
+  
+  .chat-container {
+    height: 90vh;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .chat-container {
+    height: 88vh;
+  }
+  .submit-message-button {
+    height: 100%;
+  }
+}
+
+@media screen and (max-height: 600px) {
+
+
+  .message-form {
+    margin-top: 1em !important;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .message-input {
+    width: 75%;
+  }
+
+  .submit-message-button {
+    width: 15%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login-wrapper {
+    width: 75%;
+    font-size: .75em;
+  }
+
+  .swap-sign-view {
+    font-size: 1em !important;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .burger-menu-header {
+    display: inline-flex !important;
+  }
+
+  .room-container {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 576px) {
+
+  .message-form {
+    padding: .5em;
+  }
+
+  .message-input {
+    margin-left: 0 !important;
+  }
+
+  .login-fields {
+    width: 60%;
+  }
+
+  .delete-modal-content {
+    font-size: .75em;
+  }
 }
