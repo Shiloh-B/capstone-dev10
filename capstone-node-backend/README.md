@@ -10,9 +10,9 @@ This folder holds all the Node back-end files for the application
 
 
 ### Technology
-Folder is created using Node.
+Files were created using Node.
 
 
 ### View 
 To view this folder, clone this repo to your desktop.<br />
-Open the capstone-jave-backend directory using a code editor.<br />
+Open the capstone-node-backend directory using a code editor.<br />
