@@ -13,7 +13,9 @@ code {
 }
 
 /* Landing Page */
-
+.home-link {
+  cursor: pointer;
+}
 .landing-container {
   height: 100vh;
   display: flex;
