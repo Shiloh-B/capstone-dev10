@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@mui/material'
 
 const Header = () => {
@@ -24,6 +25,34 @@ const Header = () => {
   return (
     <AppBar position="static">
         <Toolbar>
+          <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              aria-controls="burger-menu"
+              sx={{ mr: 2 }}
+              className='burger-menu-header'
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="burger-menu"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={() => console.log('handle')}>Rooms</MenuItem>
+          </Menu>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             chat.app
           </Typography>
@@ -44,12 +73,12 @@ const Header = () => {
               anchorEl={anchorEl}
               anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'left',
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'left',
               }}
               open={Boolean(anchorEl)}
               onClose={handleClose}
