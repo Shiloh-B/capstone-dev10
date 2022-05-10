@@ -20,12 +20,22 @@ const Header = () => {
     localStorage.removeItem("token");
     navigate('/auth');
   }
+  const handleAbout = () =>{
+    navigate('/about');
+  }  
+   const handleHome = () => {
+    navigate('/home');
+
+  }
+  
 
   return (
     <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            chat.app
+            <span 
+            className='home-link'
+            onClick={()=>navigate("/home")}>chat.app</span>
           </Typography>
           
           <div>
@@ -54,7 +64,9 @@ const Header = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+              <MenuItem onClick={handleLogOut}>Logout</MenuItem>   
+              <MenuItem onClick={handleAbout}>About</MenuItem>
+              <MenuItem onClick={handleHome}>Home</MenuItem>
             </Menu>
           </div>
           
