@@ -231,6 +231,10 @@ code {
 /* media queries */
 
 @media screen and (max-height: 800px) {
+  .message-container {
+    margin-bottom: 1em;
+  }
+  
   .chat-container {
     height: 90vh;
   }
@@ -239,6 +243,17 @@ code {
 @media screen and (max-height: 700px) {
   .chat-container {
     height: 88vh;
+  }
+  .submit-message-button {
+    height: 100%;
+  }
+}
+
+@media screen and (max-height: 600px) {
+
+
+  .message-form {
+    margin-top: 1em !important;
   }
 }
 
@@ -263,6 +278,16 @@ code {
   }
 }
 
+@media screen and (max-width: 700px) {
+  .burger-menu-header {
+    display: inline-flex !important;
+  }
+
+  .room-container {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 576px) {
 
   .message-form {
@@ -275,14 +300,6 @@ code {
 
   .login-fields {
     width: 60%;
-  }
-
-  .burger-menu-header {
-    display: inline-flex !important;
-  }
-
-  .room-container {
-    display: none;
   }
 
   .delete-modal-content {
