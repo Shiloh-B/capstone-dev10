@@ -12,5 +12,5 @@ This folder holds all the Java back-end files for the application.
 Files were created using Java, and Springboot.
 
 ### View 
-To view this project, clone this repo to your desktop.<br />
+To view this folder, clone this repo to your desktop.<br />
 Open the capstone-jave-backend directory using a code editor that supports a fully-functional integration with Maven.<br />
