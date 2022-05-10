@@ -16,11 +16,11 @@ const ChatContainer = ({ currentRoom, getUserDetails }) => {
 
   useEffect(() => {
 
-    let s = io('http://localhost:3003', { auth: { token: localStorage.getItem('token') }});
+    let s = io(`${window.SOCKET_URL}`, { auth: { token: localStorage.getItem('token') }});
     setSocket(s);
     getUserDetails(jwtDecode(localStorage.getItem("token")).sub);
 
-    fetch(`http://localhost:8080/message/room/${currentRoom.roomId}`, {
+    fetch(`${window.API_URL}/message/room/${currentRoom.roomId}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -86,7 +86,7 @@ const ChatContainer = ({ currentRoom, getUserDetails }) => {
       setMessage('');
 
     // store the message
-    fetch('http://localhost:8080/message', {
+    fetch(`${window.API_URL}/message`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,

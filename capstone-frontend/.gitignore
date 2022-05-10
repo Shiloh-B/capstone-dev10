@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+Dockerfile
+.dockerignore
+85-set-environment-vars.sh
+
+/public/config.js
