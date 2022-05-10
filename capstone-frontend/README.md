@@ -9,7 +9,7 @@
 This folder holds all the front-end files for the application.
 
 ### Technology
-Files were created using JS, AWS, Web sockets, React MUI, and Node.
+Files were created using JS, Web sockets, and React MUI.
 
 ### View 
 To view this folder in action, clone this repo to your desktop.<br />
