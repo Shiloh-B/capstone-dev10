@@ -1,4 +1,4 @@
-# Frontend of chat.app 
+# Database of chat.app 
 ## Table of contents
 * [Overview](#overview)
 * [Technology](#technology)
@@ -6,7 +6,7 @@
 
 
 ### Overview
-This folder holds all the sql files for the application.
+This folder holds all the database files for the application.
 
 ### Technology
 Files were created using SQL.
