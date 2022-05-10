@@ -230,11 +230,19 @@ code {
 
 /* media queries */
 
-@media screen and (max-width: 850px) {
+@media screen and (max-height: 800px) {
   .chat-container {
     height: 90vh;
   }
+}
 
+@media screen and (max-height: 700px) {
+  .chat-container {
+    height: 88vh;
+  }
+}
+
+@media screen and (max-width: 850px) {
   .message-input {
     width: 75%;
   }
@@ -256,7 +264,13 @@ code {
 }
 
 @media screen and (max-width: 576px) {
-  .login-wrapper {
+
+  .message-form {
+    padding: .5em;
+  }
+
+  .message-input {
+    margin-left: 0 !important;
   }
 
   .login-fields {
