@@ -7,6 +7,7 @@ public interface UserRepository {
     AppUser findByUsername(String username);
     AppUser add(AppUser appUser);
     boolean update(AppUser appUser);
+    boolean addToken(String token);
 //    boolean deleteByUsername(String username);
 
 }

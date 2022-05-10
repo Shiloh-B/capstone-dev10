@@ -1,19 +1,19 @@
 package capstone.data;
 
-import capstone.controllers.AuthController;
 import capstone.data.mappers.AppUserMapper;
 import capstone.models.AppUser;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class UserTemplateRepository implements  UserRepository {
@@ -109,19 +109,19 @@ public class UserTemplateRepository implements  UserRepository {
     }
 
 
-    public AppUser addToken(AppUser appUser) {
+    public boolean addToken(String token) {
         final String sql = "insert into token(token) values (?)";
 
         int rowsAffected = jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, AuthController.getJwtToken();
-            return ps;
+                    PreparedStatement ps = connection.prepareStatement(sql, Statement.NO_GENERATED_KEYS);
+                    ps.setString(1, token);
+                    return ps;
                 }
         );
 
         if (rowsAffected <= 0) {
-            return null;
+            return false;
         }
-        return appUser;
+        return true;
     }
 }

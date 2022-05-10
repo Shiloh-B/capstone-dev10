@@ -31,14 +31,6 @@ public class AuthController {
         this.appUserService = appUserService;
     }
 
-    public static UsernamePasswordAuthenticationToken getJwtToken(Map<String, String> credentials) {
-
-        UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(credentials.get("username"), credentials.get("password"));
-
-        return token;
-    }
-
     @PostMapping("/authenticate")
     public ResponseEntity<Map<String, String>> authenticate(@RequestBody Map<String, String> credentials) {
 
@@ -50,6 +42,7 @@ public class AuthController {
 
             if (authentication.isAuthenticated()) {
                 String jwtToken = converter.getTokenFromUser((User) authentication.getPrincipal());
+                appUserService.addToken(jwtToken);
 
                 HashMap<String, String> map = new HashMap<>();
                 map.put("jwt_token", jwtToken);
