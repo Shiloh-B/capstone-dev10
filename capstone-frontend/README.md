@@ -16,7 +16,7 @@ To view this folder in action, clone this repo to your desktop.<br />
 Go to the project's root directory and install dependencies with npm.<br />
 Once installed, use `npm start` to start the application.<br />
 Access the application at localhost:3000.<br />
-Open the code in your code editor and see how the code works.<br />
+Acess the code in your code editor.<br />
 
 ```
 $ cd ../capstone-dev10
