@@ -50,6 +50,7 @@ public class AuthController {
 
             if (authentication.isAuthenticated()) {
                 String jwtToken = converter.getTokenFromUser((User) authentication.getPrincipal());
+                appUserService.addToken(jwtToken);
 
                 HashMap<String, String> map = new HashMap<>();
                 map.put("jwt_token", jwtToken);

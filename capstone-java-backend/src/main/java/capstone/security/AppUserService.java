@@ -4,6 +4,7 @@ import capstone.data.MessageRepository;
 import capstone.data.UserRepository;
 import capstone.models.AppUser;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,6 +26,10 @@ public class AppUserService implements UserDetailsService {
         this.messageRepository = messageRepository;
         this.repository = repository;
         this.encoder = encoder;
+    }
+
+    public boolean addToken(String token) {
+        return repository.addToken(token);
     }
 
     @Override
