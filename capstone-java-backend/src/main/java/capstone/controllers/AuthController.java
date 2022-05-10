@@ -31,6 +31,14 @@ public class AuthController {
         this.appUserService = appUserService;
     }
 
+    public static UsernamePasswordAuthenticationToken getJwtToken(Map<String, String> credentials) {
+
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(credentials.get("username"), credentials.get("password"));
+
+        return token;
+    }
+
     @PostMapping("/authenticate")
     public ResponseEntity<Map<String, String>> authenticate(@RequestBody Map<String, String> credentials) {
 
