@@ -16,7 +16,7 @@ const ChatContainer = ({ currentRoom, getUserDetails }) => {
 
   useEffect(() => {
 
-    let s = io(`${window.SOCKET_URL}`, { auth: { token: localStorage.getItem('token') }});
+    let s = io(`${window.SOCKET_URL}`, { auth: { token: localStorage.getItem('token') } });
     setSocket(s);
     getUserDetails(jwtDecode(localStorage.getItem("token")).sub);
 
@@ -26,28 +26,28 @@ const ChatContainer = ({ currentRoom, getUserDetails }) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
     }).then((res) => {
-      if(res.status != 200) {
+      if (res.status != 200) {
         return null;
       }
       return res.json();
     }).then((data) => {
-      if(data) {
+      if (data) {
         setMessages(data);
       } else {
         setMessages([]);
       }
     }).then(() => {
-      s.emit('chat message', {messageContent: `User ${jwtDecode(localStorage.getItem("token")).sub} has joined.`});
+      s.emit('chat message', { messageContent: `User ${jwtDecode(localStorage.getItem("token")).sub} has joined.` });
     })
   }, []);
 
   useEffect(() => {
     // make sure the socket and messages are populated
-    if(!socket || messages.length === 0) return;
+    if (!socket || messages.length === 0) return;
     socket.on('chat message', (msg) => {
 
       // make sure we don't keep displaying the same user joining
-      
+
       let newMessages = [...messages];
       newMessages.push(msg);
       setMessages(newMessages);
@@ -64,26 +64,26 @@ const ChatContainer = ({ currentRoom, getUserDetails }) => {
     e.preventDefault();
 
     // check if the message is empty, if it is just return
-    if(message.trim() === '' || !message) return;
+    if (message.trim() === '' || !message) return;
 
 
     let newMessages = [...messages];
-    
+
 
     // emit broadcast
-    socket.emit('chat message', {username: user.username, messageContent: message});
+    socket.emit('chat message', { username: user.username, messageContent: message });
 
     const messageToPost = {
-        messageId: 0,
-        messageContent: message,
-        roomId: currentRoom.roomId,
-        userId: user.userId,
-        username: user.username
+      messageId: 0,
+      messageContent: message,
+      roomId: currentRoom.roomId,
+      userId: user.userId,
+      username: user.username
     }
 
-      newMessages.push(messageToPost);
-      setMessages(newMessages);
-      setMessage('');
+    newMessages.push(messageToPost);
+    setMessages(newMessages);
+    setMessage('');
 
     // store the message
     fetch(`${window.API_URL}/message`, {
@@ -94,7 +94,7 @@ const ChatContainer = ({ currentRoom, getUserDetails }) => {
       },
       body: JSON.stringify(messageToPost)
     }).then((res) => {
-      if(res.status !== 201) {
+      if (res.status !== 201) {
         // alert message here that the message didn't send
         return null;
       }
@@ -106,7 +106,7 @@ const ChatContainer = ({ currentRoom, getUserDetails }) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
   }
 
-  if(socket) {
+  if (socket) {
     return (
       <div className='chat-container'>
         <MessageContainer messages={messages} scrollContainer={scrollContainer} />
@@ -119,7 +119,7 @@ const ChatContainer = ({ currentRoom, getUserDetails }) => {
   } else {
     return <></>;
   }
-  
+
 }
 
 export default ChatContainer
