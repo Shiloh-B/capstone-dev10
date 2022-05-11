@@ -22,7 +22,7 @@ const Message = ({ message }) => {
   }
 
   const findMessage = () => {
-    if(message.messageId == 0) {
+    if(!message.messageId || message.messageId == 0) {
       findMessageUsernameAndContent();
     } else {
       deleteMessageRequest(message.messageId);
