@@ -3,9 +3,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@mui/material'
+import Tooltip from '@mui/material/Tooltip';
 
 const Header = () => {
-  
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [burgerAnchorEl, setBurgerAnchorEl] = useState(null);
   const [path, setPath] = useState('');
@@ -36,11 +37,11 @@ const Header = () => {
     localStorage.removeItem("token");
     navigate('/auth');
   }
-  const handleAbout = () =>{
+  const handleAbout = () => {
     navigate('/about');
     handleClose();
-  }  
-   const handleHome = () => {
+  }
+  const handleHome = () => {
     navigate('/home');
     handleClose();
   }
@@ -49,13 +50,13 @@ const Header = () => {
     // where we would swap rooms
     handleCloseBurger();
   }
-  
+
 
   return (
     <AppBar position="static">
-        <Toolbar>
-          {
-            path === '/home' ?
+      <Toolbar>
+        {
+          path === '/home' ?
             <>
               <IconButton
                 size="large"
@@ -67,7 +68,7 @@ const Header = () => {
                 className='burger-menu-header'
                 onClick={handleBurgerMenu}
               >
-              <MenuIcon />
+                <MenuIcon />
               </IconButton>
               <Menu
                 id="burger-menu"
@@ -88,13 +89,13 @@ const Header = () => {
               </Menu>
             </> :
             <></>
-          }
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <span 
+        }
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <span
             className='home-link'
-            onClick={()=>navigate("/home")}>chat.app</span>
-          </Typography>
-          
+            onClick={() => navigate("/home")}>chat.app</span>
+        </Typography>
+        <Tooltip title="User menu" placement='left'>
           <div>
             <IconButton
               size="large"
@@ -121,14 +122,14 @@ const Header = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleLogOut}>Logout</MenuItem>   
+              <MenuItem onClick={handleLogOut}>Logout</MenuItem>
               <MenuItem onClick={handleAbout}>About</MenuItem>
               <MenuItem onClick={handleHome}>Home</MenuItem>
             </Menu>
-          </div>
-          
-        </Toolbar>
-      </AppBar>
+          </div></Tooltip>
+
+      </Toolbar>
+    </AppBar>
   )
 }
 
