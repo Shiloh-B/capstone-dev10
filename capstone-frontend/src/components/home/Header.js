@@ -95,7 +95,6 @@ const Header = () => {
             className='home-link'
             onClick={() => navigate("/home")}>chat.app</span>
         </Typography>
-        <Tooltip title="User menu" placement='left'>
           <div>
             <IconButton
               size="large"
@@ -126,8 +125,7 @@ const Header = () => {
               <MenuItem onClick={handleAbout}>About</MenuItem>
               <MenuItem onClick={handleHome}>Home</MenuItem>
             </Menu>
-          </div></Tooltip>
-
+          </div>
       </Toolbar>
     </AppBar>
   )
