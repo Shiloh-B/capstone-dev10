@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/create_account").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/*")
                 .hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.GET, "/message", "/message/*")
+                .antMatchers(HttpMethod.GET, "/message", "/message/*", "/message/find/*/*")
                 .hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/message", "/message/*")
                 .hasAnyRole("USER", "ADMIN")
@@ -52,6 +52,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/room", "/room/*")
                 .hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET,
+                        "/chat_app", "/api/chat/*").permitAll()
+                .antMatchers(HttpMethod.POST,
+                        "/chat_app").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT,
+                        "/chat_app/*").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE,
+                        "/chat_app/*").hasAnyRole("ADMIN")
+
                 .antMatchers("/**").denyAll()
                 .anyRequest().authenticated()
                 .and()

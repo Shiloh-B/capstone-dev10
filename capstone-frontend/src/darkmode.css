@@ -31,15 +31,15 @@ body {
   
   .room-container {
     width: 25%;
-    border-right: 5px solid #1976d2;
-    background-color: #004183;
+    border-right: 5px solid #3A3A3F;
+    background-color: #121213;
   }
   
   /* Room */
   
   .single-room-container {
     width: 100%;
-    border-bottom: 4px solid #1976d2;
+    border-bottom: 4px solid #3A3A3F;
     color: white;
     cursor: pointer;
     transition: background-color .2s ease;
@@ -47,11 +47,11 @@ body {
   }
   
   .single-room-container:hover {
-    background-color: #135ba3;
+    background-color: #202022;
   }
   
   .active-room {
-    background-color: #135ba3;
+    background-color: #4E4E53;
   }
   
   .single-room-name {
@@ -75,11 +75,11 @@ body {
   
   .single-message-container {
     width: 100%;
-    border-bottom: 4px solid #1976d2;
+    border-bottom: 4px solid #3A3A3F;
   }
   
   .server-message {
-    background-color: #004183;
+    background-color: #121213;
     color: white;
   }
   
@@ -113,12 +113,12 @@ body {
     height: 100vh;
     align-items: center;
     justify-content: center;
-    background-color: #201f20;
+    background: linear-gradient(0.10turn, #202022, #121213);
   }
   
   .login-wrapper {
     color: #000000;
-    background-color: rgb(116, 113, 116);
+    background-color: rgb(108, 108, 113);
     width: 50%;
     text-align: center;
     padding: 1em;

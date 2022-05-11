@@ -23,6 +23,10 @@ public class MessageService {
         return messageRepository.findByRoomId(roomId);
     }
 
+    public Message findByUsernameAndMessage(String username, String message) {
+        return messageRepository.findByUsernameAndMessage(username, message);
+    }
+
     public Message findById(int messageId) {
         return messageRepository.findById(messageId);
     }
