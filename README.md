@@ -4,7 +4,7 @@
 * [Features](#features)
 * [Technology](#technology)
 * [Launch](#launch)
-
+* [Presentation slides](#https://docs.google.com/presentation/d/1DtHGu1nQyMW9cDrIe7_yIe1CMYN7Ioe8qPtaO4vjFDI/edit?usp=sharing)
 
 ### Overview
 This app was created for chat messaging.
