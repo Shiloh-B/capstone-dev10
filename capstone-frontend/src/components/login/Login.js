@@ -2,13 +2,16 @@ import React, { useContext, useState, useEffect } from 'react';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 import UserContext from '../../context/UserContext';
+import SocketContext from '../../context/SocketContext';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
+import { io } from 'socket.io-client';
 
 
 const Login = () => {
 
   const [user, setUser] = useContext(UserContext);
+  const [socket, setSocket] = useContext(SocketContext);
   const [errors, setErrors] = useState('');
   const [isSignIn, setIsSignIn] = useState(true);
 
@@ -67,8 +70,12 @@ const Login = () => {
       if(data.jwt_token) {
         localStorage.setItem("token", data.jwt_token);
         getUserDetails();
-        // setUser({username: user.username});
-        navigate('/home');
+
+        // lets get our socket connection here as well on a successful sign in BEFORE we navigate
+        let s = io(`${window.SOCKET_URL}`, { auth: { token: localStorage.getItem('token') } });
+        setSocket(s);
+        setTimeout(() => {}, 500);
+        navigate("/home");
       } else {
         setErrors('Wrong username or password.');
       }

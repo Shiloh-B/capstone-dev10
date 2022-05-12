@@ -1,6 +1,6 @@
 import './index.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserContext from './context/UserContext';
 import SocketContext from './context/SocketContext';
 import Home from './components/home/Home';
@@ -15,6 +15,7 @@ function App() {
     email: '',
     username: ''
   });
+
 
   return (
     <div className="App">

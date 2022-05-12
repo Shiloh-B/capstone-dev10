@@ -2,11 +2,13 @@ import React, { useState, useEffect, useContext } from 'react'
 import Room from './Room';
 import JoinRoom from './JoinRoom';
 import UserContext from '../../../context/UserContext';
+import jwtDecode from 'jwt-decode';
 
 
 const RoomContainer = ({ setCurrentRoom }) => {
 
   const [user, setUser] = useContext(UserContext);
+  const [testCount, setTestCount] = useState(0);
   const [roomToJoin, setRoomToJoin] = useState('');
   const [roomList, setRoomList] = useState([]);
   const [rooms, setRooms] = useState([{
@@ -18,13 +20,34 @@ const RoomContainer = ({ setCurrentRoom }) => {
   // need to wait for the function to be initialized prior to passing it as a prop
   useEffect(() => {
     setRoomList(rooms.map((room, key) => <Room room={room} key={key} setCurrentRoom={setCurrentRoom} handleChangeActiveRoom={handleChangeActiveRoom} />));
+    setTestCount(testCount + 1);
   }, [rooms]);
 
   useEffect(() => {
-    if(!user.userId) return;
+    fetch(`${window.API_URL}/user/${jwtDecode(localStorage.getItem('token')).sub}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => {
+      if(res.status != 200) {
+        return;
+      }
 
-    // grab all rooms for the user
-    fetch(`${window.API_URL}/room/user/${user.userId}`, {
+      return res.json();
+    }).then((data) => {
+      if(data) {
+        setUser({
+          username: data.username,
+          userId: data.appUserId
+        });
+        getRoomsForUser(data.appUserId);
+      }
+    });
+    
+  }, []);
+
+  const getRoomsForUser = (userId) => {
+    fetch(`${window.API_URL}/room/user/${userId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
@@ -42,7 +65,7 @@ const RoomContainer = ({ setCurrentRoom }) => {
       }
       setRooms(data);
     });
-  }, [user]);
+  }
 
   const addRoomHasUser = (roomId) => {
     fetch(`${window.API_URL}/room/roomhasuser/${roomId}/${user.userId}`, {
@@ -122,13 +145,10 @@ const RoomContainer = ({ setCurrentRoom }) => {
     let newRooms = [...rooms];
     newRooms.push({roomId: 0, roomName: roomToJoin, isActive: false});
     setRooms(newRooms);
-
     setRoomToJoin('');
   }
 
   const handleChangeActiveRoom = (roomName) => {
-
-    console.log(roomName);
 
     let newRooms = [...rooms];
 
@@ -142,6 +162,7 @@ const RoomContainer = ({ setCurrentRoom }) => {
     }
 
     setRooms(newRooms);
+    setRoomList(rooms.map((room, key) => <Room room={room} key={key} setCurrentRoom={setCurrentRoom} handleChangeActiveRoom={handleChangeActiveRoom} />));
   }
 
   return (

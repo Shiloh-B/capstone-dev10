@@ -6,19 +6,24 @@ import MessageContainer from './MessageContainer';
 import jwtDecode from 'jwt-decode';
 import { io } from 'socket.io-client';
 
-const ChatContainer = ({ currentRoom, getUserDetails }) => {
+const ChatContainer = ({ currentRoom, setCurrentRoom, getUserDetails }) => {
 
   const [user, setUser] = useContext(UserContext);
   const [socket, setSocket] = useContext(SocketContext);
   const [message, setMessage] = useState('');
+  const [testCount, setTestCount] = useState(0);
 
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
 
-    let s = io(`${window.SOCKET_URL}`, { auth: { token: localStorage.getItem('token') } });
-    setSocket(s);
-    getUserDetails(jwtDecode(localStorage.getItem("token")).sub);
+    let s;
+
+    if(!socket) {
+      s = io(`${window.SOCKET_URL}`, { auth: { token: localStorage.getItem('token') } });
+      setTimeout(() => {}, 500);
+      setSocket(s);
+    }
 
     fetch(`${window.API_URL}/message/room/${currentRoom.roomId}`, {
       method: 'GET',
@@ -37,13 +42,20 @@ const ChatContainer = ({ currentRoom, getUserDetails }) => {
         setMessages([]);
       }
     }).then(() => {
-      s.emit('chat message', { messageContent: `User ${jwtDecode(localStorage.getItem("token")).sub} has joined.` });
-    })
+      if(testCount < 2) {
+        if(!socket) {
+          s.emit('chat message', { messageContent: `User ${jwtDecode(localStorage.getItem("token")).sub} has joined.` })
+        } else {
+          socket.emit('chat message', { messageContent: `User ${jwtDecode(localStorage.getItem("token")).sub} has joined.` });
+        }
+      }
+      setTestCount(testCount + 1);
+    });
   }, [currentRoom]);
 
   useEffect(() => {
+    if(!socket) return;
     // make sure the socket and messages are populated
-    if (!socket || messages.length === 0) return;
     socket.on('chat message', (msg) => {
 
       // make sure we don't keep displaying the same user joining
@@ -51,9 +63,8 @@ const ChatContainer = ({ currentRoom, getUserDetails }) => {
       let newMessages = [...messages];
       newMessages.push(msg);
       setMessages(newMessages);
-
     });
-  }, [messages, socket])
+  }, [messages])
 
 
   const handleMessageChange = (e) => {

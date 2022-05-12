@@ -56,7 +56,7 @@ const Home = () => {
       <Header />
       <div className='room-chat-container'> 
         <RoomContainer setCurrentRoom={setCurrentRoom} />
-        <ChatContainer currentRoom={currentRoom} getUserDetails={getUserDetails} />
+        <ChatContainer currentRoom={currentRoom} getUserDetails={getUserDetails} setCurrentRoom={setCurrentRoom} />
       </div>
     </div>
   )
