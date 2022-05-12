@@ -13,7 +13,9 @@ code {
 }
 
 /* Landing Page */
-
+.home-link {
+  cursor: pointer;
+}
 .landing-container {
   height: 100vh;
   display: flex;
@@ -25,6 +27,10 @@ code {
   display: flex;
   flex-direction: row;
   flex: 1 1 auto;
+}
+
+.burger-menu-header {
+  display: none !important;
 }
 
 /* Room Container */
@@ -98,6 +104,7 @@ code {
 .single-message-container {
   width: 100%;
   border-bottom: 4px solid #1976d2;
+  position: relative;
 }
 
 .server-message {
@@ -126,6 +133,58 @@ code {
 .submit-message-button {
   width: 10%;
   height: 60%;
+}
+
+.delete-message-button {
+  position: absolute;
+  font-weight: bold;
+  font-size: 1.25em;
+  color: red;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+}
+
+.delete-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  color: black;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  color: #aaa;
+  float: right;
+  font-size: 1.75em;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.delete-modal-content {
+  position: relative;
+  background-color: #fefefe;
+  padding: 15px;
+  border: 1px solid #888;
+  width: 50%; 
 }
 
 /* Login */
@@ -189,4 +248,83 @@ code {
   text-align: left;
   color: red;
   margin: 0;
+}
+
+/* media queries */
+
+@media screen and (max-height: 800px) {
+  .message-container {
+    margin-bottom: 1em;
+  }
+  
+  .chat-container {
+    height: 90vh;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .chat-container {
+    height: 88vh;
+  }
+  .submit-message-button {
+    height: 100%;
+  }
+}
+
+@media screen and (max-height: 600px) {
+
+
+  .message-form {
+    margin-top: 1em !important;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .message-input {
+    width: 75%;
+  }
+
+  .submit-message-button {
+    width: 15%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login-wrapper {
+    width: 75%;
+    font-size: .75em;
+  }
+
+  .swap-sign-view {
+    font-size: 1em !important;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .burger-menu-header {
+    display: inline-flex !important;
+  }
+
+  .room-container {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 576px) {
+
+  .message-form {
+    padding: .5em;
+  }
+
+  .message-input {
+    margin-left: 0 !important;
+  }
+
+  .login-fields {
+    width: 60%;
+  }
+
+  .delete-modal-content {
+    font-size: .75em;
+  }
 }
